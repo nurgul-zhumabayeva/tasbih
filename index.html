@@ -1,0 +1,1403 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Тасбих</title>
+<meta name="description" content="Электронные чётки: зикры, дуа, 99 имён Аллаха и суры">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Тасбих">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+@font-face{font-family:"Montserrat";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/montserrat-cyrillic-ext-wght-normal.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}
+@font-face{font-family:"Montserrat";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/montserrat-cyrillic-wght-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:"Montserrat";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/montserrat-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Montserrat";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/montserrat-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Amiri";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/amiri-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EEFF;}
+@font-face{font-family:"Amiri";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/amiri-arabic-700-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EEFF;}
+@font-face{font-family:"Amiri";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/amiri-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Amiri";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/amiri-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+</style>
+<style>
+/* Layout: one full-screen night-sky stage; text floats at top, beads cross the middle, counter below, solar system at the bottom. Single dark look by design. */
+:root{
+  --bg:#0c151a;
+  --ink:#f2f6f7;
+  --ink-soft:rgba(226,238,240,.72);
+  --ink-faint:rgba(226,238,240,.45);
+  --ember:#ff6a2b;
+  --ember-soft:#ffb27f;
+  --bead:#8fb9c2;
+  --glass:rgba(14,24,30,.72);
+  --glass-line:rgba(190,225,232,.16);
+  --f-ar:"Amiri","Noto Naskh Arabic","Geeza Pro","Traditional Arabic",serif;
+  --f-ui:"Montserrat","Segoe UI",Roboto,system-ui,sans-serif;
+  color-scheme:dark;
+}
+[hidden]{display:none!important;}
+html,body{height:100%;margin:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);overflow:hidden;
+  -webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation;}
+#sky{position:fixed;inset:0;width:100%;height:100%;display:block;}
+.app{position:fixed;inset:0;display:flex;flex-direction:column;pointer-events:none;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
+.app button,.app input,.app label,.sheet{pointer-events:auto;}
+
+/* top bar */
+.top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-block:10px 4px;}
+.icon-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--glass-line);background:var(--glass);
+  color:var(--ink);display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+.icon-btn svg{width:20px;height:20px;}
+.icon-btn:focus-visible,.seg button:focus-visible,.ctl:focus-visible{outline:2px solid var(--ember-soft);outline-offset:2px;}
+.seg{display:flex;padding:3px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-line);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+.seg button{border:0;background:transparent;color:var(--ink-soft);font:600 12.5px/1 var(--f-ui);letter-spacing:.02em;
+  padding:9px 14px;border-radius:999px;cursor:pointer;}
+.seg button[aria-pressed="true"]{background:linear-gradient(180deg,#ff8a50,#e2511c);color:#fff;box-shadow:0 2px 12px rgba(255,106,43,.35);}
+.top-right{display:flex;gap:8px;}
+
+/* text */
+.words{text-align:center;padding-top:clamp(8px,3vh,28px);display:flex;flex-direction:column;align-items:center;gap:6px;}
+.step-label{font:600 11px/1 var(--f-ui);letter-spacing:.14em;text-transform:uppercase;color:var(--ember-soft);min-height:11px;}
+.ar{font-family:var(--f-ar);direction:rtl;font-weight:700;line-height:1.55;color:var(--ink);
+  text-shadow:0 2px 24px rgba(0,0,0,.45);max-width:640px;text-wrap:balance;max-height:34vh;overflow:auto;padding-inline:4px;}
+.divider{display:flex;align-items:center;gap:8px;width:120px;}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(226,238,240,.35),transparent);}
+.divider i{width:6px;height:6px;background:var(--ember);transform:rotate(45deg);box-shadow:0 0 8px var(--ember);}
+.tr{font:700 clamp(17px,4.6vw,22px)/1.25 var(--f-ui);letter-spacing:.01em;max-width:520px;text-wrap:balance;}
+.body{font:400 clamp(15px,4.2vw,18px)/1.55 var(--f-ui);color:var(--ink);max-width:560px;max-height:40vh;overflow:auto;text-wrap:pretty;
+  padding:14px 16px;border-radius:16px;background:rgba(8,14,18,.45);border:1px solid var(--glass-line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);pointer-events:auto;user-select:text;-webkit-user-select:text;}
+.ru{font:300 clamp(12px,3.3vw,14px)/1.4 var(--f-ui);color:var(--ink-soft);max-width:440px;text-wrap:balance;}
+
+/* bottom controls */
+.bottom{margin-top:auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;padding-block:6px 14px;}
+.bottom .left{justify-self:start;display:flex;gap:8px;}
+.bottom .right{justify-self:end;display:flex;align-items:center;gap:6px;}
+.play{width:58px;height:58px;border-radius:50%;border:0;cursor:pointer;color:#fff;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 30%,#ffb187,#ff6a2b 55%,#b9360c);box-shadow:0 0 0 6px rgba(255,106,43,.14),0 6px 24px rgba(255,90,30,.45);}
+.play svg{width:24px;height:24px;}
+.speed{display:flex;align-items:center;gap:4px;background:var(--glass);border:1px solid var(--glass-line);border-radius:999px;padding:3px;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+.speed button{width:30px;height:30px;border-radius:50%;border:0;background:rgba(255,255,255,.07);color:var(--ink);font:600 16px/1 var(--f-ui);cursor:pointer;}
+.speed span{font:600 12px/1 var(--f-ui);min-width:44px;text-align:center;font-variant-numeric:tabular-nums;}
+.hint{font:400 12px/1.3 var(--f-ui);color:var(--ink-faint);text-align:center;}
+.today{font:600 11px/1.2 var(--f-ui);color:var(--ink-faint);letter-spacing:.06em;text-align:center;}
+
+/* sheet */
+.scrim{position:fixed;inset:0;background:rgba(3,7,10,.55);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);z-index:20;}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;max-height:86%;display:flex;flex-direction:column;
+  background:linear-gradient(180deg,#132129,#0d171c);border-top:1px solid var(--glass-line);border-radius:22px 22px 0 0;
+  padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -20px 60px rgba(0,0,0,.5);
+  max-width:620px;margin-inline:auto;user-select:text;-webkit-user-select:text;}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:14px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));}
+.tabs{display:flex;gap:4px;background:rgba(255,255,255,.05);padding:3px;border-radius:999px;}
+.tabs button{border:0;background:transparent;color:var(--ink-soft);font:600 12.5px/1 var(--f-ui);padding:9px 10px;white-space:nowrap;border-radius:999px;cursor:pointer;}
+.tabs button[aria-selected="true"]{background:rgba(255,255,255,.12);color:var(--ink);}
+.sheet-body{overflow:auto;padding:4px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));
+  display:flex;flex-direction:column;gap:18px;overscroll-behavior:contain;}
+.group h3{font:700 11px/1 var(--f-ui);letter-spacing:.16em;text-transform:uppercase;color:var(--ember-soft);margin:6px 0 8px;}
+.list{display:flex;flex-direction:column;gap:6px;}
+.row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:11px 12px;border-radius:14px;
+  background:rgba(255,255,255,.035);border:1px solid transparent;cursor:pointer;text-align:left;color:var(--ink);font:inherit;width:100%;}
+.row:hover{background:rgba(255,255,255,.06);}
+.row[aria-current="true"]{border-color:rgba(255,138,80,.6);background:rgba(255,106,43,.09);}
+.row .t{font:600 14px/1.25 var(--f-ui);min-width:0;}
+.row .s{font:300 12px/1.3 var(--f-ui);color:var(--ink-soft);margin-top:2px;}
+.row .a{font:700 17px/1.4 var(--f-ar);direction:rtl;color:var(--ink-soft);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.row .n{font:700 12px/1 var(--f-ui);color:var(--ink-soft);background:rgba(255,255,255,.07);padding:6px 9px;border-radius:999px;font-variant-numeric:tabular-nums;}
+.row-wrap{display:flex;flex-direction:column;gap:6px;}
+.when{font:500 clamp(12px,3.3vw,13.5px)/1.4 var(--f-ui);color:var(--ember-soft);max-width:420px;text-wrap:balance;}
+.say{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--glass-line);background:var(--glass);color:var(--ink-soft);
+  font:600 12px/1 var(--f-ui);padding:8px 13px;border-radius:999px;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+.say svg{width:15px;height:15px;}
+.say.on{color:#fff;border-color:rgba(255,138,80,.7);background:rgba(255,106,43,.25);}
+.guide{display:flex;flex-direction:column;gap:10px;}
+.guide ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;counter-reset:g;}
+.guide li{counter-increment:g;display:grid;grid-template-columns:28px 1fr;gap:10px;padding:12px;border-radius:14px;background:rgba(255,255,255,.035);}
+.guide li::before{content:counter(g);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:700 12px/1 var(--f-ui);color:#fff;background:linear-gradient(180deg,#ff8a50,#e2511c);}
+.guide li b{display:block;font:700 14px/1.3 var(--f-ui);margin-bottom:3px;}
+.guide li span{font:300 13px/1.45 var(--f-ui);color:var(--ink-soft);}
+.guide .times{padding:14px;border-radius:16px;background:rgba(255,106,43,.08);border:1px solid rgba(255,138,80,.3);}
+.guide .times h4{margin:0 0 8px;font:700 13px/1.2 var(--f-ui);}
+.guide .times ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px;font:300 13px/1.4 var(--f-ui);color:var(--ink-soft);}
+.src{font:600 10.5px/1 var(--f-ui);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);border:1px solid rgba(226,238,240,.3);border-radius:999px;padding:7px 14px;margin-top:2px;}
+.row-line{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:stretch;}
+.star{width:44px;border-radius:14px;border:1px solid transparent;background:rgba(255,255,255,.035);color:var(--ink-faint);cursor:pointer;display:grid;place-items:center;}
+.star svg{width:18px;height:18px;}
+.star[aria-pressed="true"]{color:var(--ember);}
+.row .w{font:500 11.5px/1.3 var(--f-ui);color:var(--ember-soft);margin-top:3px;}
+.bars{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:end;height:90px;}
+.bar{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:100%;min-width:0;}
+.bar i{display:block;width:100%;max-width:26px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#ffb27f,#e2511c);min-height:2px;}
+.bar.zero i{background:rgba(255,255,255,.12);}
+.bar span{font:500 10px/1 var(--f-ui);color:var(--ink-faint);font-variant-numeric:tabular-nums;}
+.bar b{font:600 10px/1 var(--f-ui);color:var(--ink-soft);font-variant-numeric:tabular-nums;}
+.goalbar{height:6px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden;}
+.goalbar i{display:block;height:100%;background:linear-gradient(90deg,#ffb27f,#ff6a2b);border-radius:999px;}
+.row-actions{display:flex;gap:6px;justify-content:flex-end;}
+.mini{border:1px solid var(--glass-line);background:transparent;color:var(--ink-soft);font:600 12px/1 var(--f-ui);padding:8px 12px;border-radius:999px;cursor:pointer;}
+.mini.danger{color:#ffb4a0;border-color:rgba(255,120,90,.35);}
+.mini.danger.armed{background:#c9401a;color:#fff;border-color:#c9401a;}
+form.add{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:16px;background:rgba(255,255,255,.035);border:1px dashed rgba(255,178,127,.35);}
+.field{display:flex;flex-direction:column;gap:5px;}
+.field span{font:600 11px/1 var(--f-ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);}
+.field input,.field textarea{background:rgba(0,0,0,.25);border:1px solid var(--glass-line);border-radius:10px;color:var(--ink);
+  font:400 15px/1.35 var(--f-ui);padding:10px 12px;width:100%;box-sizing:border-box;}
+.field textarea{font-family:var(--f-ar);font-size:20px;direction:rtl;min-height:52px;resize:vertical;}
+.field input:focus,.field textarea:focus{outline:2px solid rgba(255,138,80,.6);outline-offset:0;}
+.form-row{display:flex;gap:8px;flex-wrap:wrap;}
+.btn{border:0;border-radius:12px;padding:12px 16px;font:700 14px/1 var(--f-ui);cursor:pointer;}
+.btn.primary{background:linear-gradient(180deg,#ff8a50,#e2511c);color:#fff;}
+.btn.ghost{background:rgba(255,255,255,.07);color:var(--ink);}
+.set{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:16px;background:rgba(255,255,255,.035);}
+.set h4{margin:0;font:700 13px/1.2 var(--f-ui);}
+.set p{margin:0;font:300 12.5px/1.4 var(--f-ui);color:var(--ink-soft);}
+.chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.chip{border:1px solid var(--glass-line);background:transparent;color:var(--ink);font:600 13px/1 var(--f-ui);padding:9px 13px;border-radius:999px;cursor:pointer;font-variant-numeric:tabular-nums;}
+.chip[aria-pressed="true"]{background:rgba(255,106,43,.18);border-color:rgba(255,138,80,.7);}
+.chips input{width:88px;background:rgba(0,0,0,.25);border:1px solid var(--glass-line);border-radius:999px;color:var(--ink);font:600 13px/1 var(--f-ui);padding:9px 12px;}
+.toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;font:400 14px/1.3 var(--f-ui);cursor:pointer;}
+.toggle input{appearance:none;-webkit-appearance:none;width:46px;height:28px;border-radius:999px;background:rgba(255,255,255,.14);position:relative;cursor:pointer;flex:none;transition:background .2s;}
+.toggle input::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#e9f1f2;transition:transform .2s;}
+.toggle input:checked{background:var(--ember);}
+.toggle input:checked::after{transform:translateX(18px);}
+input[type=range]{width:100%;accent-color:var(--ember);}
+.note{font:300 12px/1.45 var(--f-ui);color:var(--ink-faint);}
+.tracks{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.track{display:flex;flex-direction:column;gap:4px;text-align:left;padding:12px;border-radius:14px;border:1px solid var(--glass-line);background:rgba(255,255,255,.03);color:var(--ink);cursor:pointer;font:inherit;min-width:0;}
+.track b{font:700 14px/1.2 var(--f-ui);display:flex;align-items:center;gap:6px;}
+.track small{font:300 12px/1.35 var(--f-ui);color:var(--ink-soft);}
+.track[aria-checked="true"]{border-color:rgba(255,138,80,.75);background:rgba(255,106,43,.12);}
+.track[aria-checked="true"] b::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ember);box-shadow:0 0 8px var(--ember);}
+.own{display:flex;flex-direction:column;gap:6px;align-items:flex-start;}
+.file-btn{display:inline-block;}
+@media (max-width:360px){.tracks{grid-template-columns:1fr;}}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important;} }
+</style>
+</head>
+<body>
+
+
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<div class="app" id="app">
+  <div class="top">
+    <button class="icon-btn" id="openList" aria-label="Список зикров">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+    </button>
+    <div class="seg" role="group" aria-label="Режим счёта">
+      <button id="modeAuto" aria-pressed="true">Авто</button>
+      <button id="modeTap" aria-pressed="false">Касание</button>
+    </div>
+    <div class="top-right">
+      <button class="icon-btn" id="soundBtn" aria-label="Звук">
+        <svg id="soundOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/></svg>
+        <svg id="soundOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" hidden><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l5 6M22 9l-5 6"/></svg>
+      </button>
+      <button class="icon-btn" id="openSettings" aria-label="Музыка и настройки">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="words" id="words">
+    <div class="step-label" id="stepLabel"></div>
+    <div class="ar" id="ar"></div>
+    <div class="divider"><i></i></div>
+    <div class="tr" id="tr"></div>
+    <div class="ru" id="ru"></div>
+    <div class="body" id="body" hidden></div>
+    <div class="when" id="when" hidden></div>
+    <div class="src" id="src" hidden></div>
+    <button class="say ctl" id="speakBtn" type="button" aria-label="Послушать произношение">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></svg>
+      <span id="speakTxt">Произношение</span>
+    </button>
+  </div>
+
+  <div class="bottom" id="bottom">
+    <div class="left">
+      <button class="icon-btn ctl" id="resetBtn" aria-label="Сбросить счёт">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+      </button>
+      <button class="icon-btn ctl" id="undoBtn" aria-label="Отменить последний счёт" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+      </button>
+    </div>
+    <div class="center">
+      <button class="play ctl" id="playBtn" aria-label="Старт">
+        <svg id="icPlay" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
+        <svg id="icPause" viewBox="0 0 24 24" fill="currentColor" hidden><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></svg>
+      </button>
+      <div class="hint" id="tapHint" hidden>Нажимайте<br>в любом месте</div>
+    </div>
+    <div class="right">
+      <div class="speed" id="speedBox">
+        <button id="slower" aria-label="Медленнее">−</button>
+        <span id="speedVal">0.8 с</span>
+        <button id="faster" aria-label="Быстрее">+</button>
+      </div>
+      <div class="today" id="today" hidden></div>
+    </div>
+  </div>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+<section class="sheet" id="sheet" hidden aria-label="Меню">
+  <div class="sheet-head">
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tabList" aria-selected="true">Зикры</button>
+      <button role="tab" id="tabDua" aria-selected="false">Как делать дуа</button>
+      <button role="tab" id="tabSettings" aria-selected="false">Настройки</button>
+    </div>
+    <button class="icon-btn" id="closeSheet" aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="sheet-body" id="paneList"></div>
+
+  <div class="sheet-body guide" id="paneDua" hidden>
+    <button class="btn primary" id="startMyDua" type="button">Читать моё дуа по порядку</button>
+    <button class="btn ghost" id="startKz" type="button">Мен үшін дұға — дуа за себя</button>
+    <ol>
+      <li><div><b>Намерение и уверенность</b><span>Обращайтесь искренне и будьте уверены, что Аллах ответит. Желательно быть в омовении и повернуться к кибле.</span></div></li>
+      <li><div><b>Поднимите руки</b><span>Ладони раскрыты к небу, на уровне груди или лица.</span></div></li>
+      <li><div><b>Начните с восхваления Аллаха</b><span>«СубханАллахи валь-хамду лилляхи ва ля иляха илляЛлаху валлаху акбар…»</span></div></li>
+      <li><div><b>Салават Пророку ﷺ</b><span>«Аллахумма салли ‘аля Мухаммадин ва ‘аля али Мухаммад…» Без салавата дуа «остаётся между небом и землёй».</span></div></li>
+      <li><div><b>Обратитесь по прекрасным именам</b><span>Призовите Аллаха именем, которое подходит к просьбе: Йа Фаттах — об открытии дверей, Йа Раззак — о пропитании, Йа Гафур — о прощении.</span></div></li>
+      <li><div><b>Попросите прощения</b><span>«Рабби-гфир ли», «Аллахумма иннака ‘афуввун…» — признайте свои ошибки перед Ним.</span></div></li>
+      <li><div><b>Просите о своём</b><span>О благе этой жизни и вечной, за родителей, близких и всех мусульман. Можно своими словами на любом языке. Повторяйте просьбу по три раза.</span></div></li>
+      <li><div><b>Не торопите ответ</b><span>Не говорите «я просил, а мне не ответили». Ответ приходит так, как лучше: сразу, позже или защитой от беды.</span></div></li>
+      <li><div><b>Завершите салаватом и «Амин»</b><span>Снова салават Пророку ﷺ, хвала Аллаху и «Амин».</span></div></li>
+    </ol>
+    <div class="times">
+      <h4>Когда дуа принимается особенно</h4>
+      <ul>
+        <li>Последняя треть ночи</li>
+        <li>Между азаном и икаматом</li>
+        <li>В земном поклоне (суджуд)</li>
+        <li>Последний час пятницы, перед магрибом</li>
+        <li>Во время дождя</li>
+        <li>При разговении во время поста</li>
+        <li>В пути</li>
+      </ul>
+    </div>
+    <p class="note">Ваше дуа по порядку: хвала → салават → имена Аллаха → покаяние → просьбы → салават и «Амин». Его можно открыть кнопкой сверху или в списке «Зикры».</p>
+  </div>
+
+  <div class="sheet-body" id="paneSettings" hidden>
+    <div class="set">
+      <h4>Фоновая музыка</h4>
+      <div class="tracks" id="trackList" role="radiogroup" aria-label="Фоновая музыка"></div>
+      <label class="field" for="musicVol"><span>Громкость музыки</span><input type="range" id="musicVol" min="0" max="1" step="0.05" value="0.7"></label>
+      <div class="own">
+        <label class="btn ghost file-btn" for="ownFile">Загрузить свою музыку</label>
+        <input type="file" id="ownFile" accept="audio/*" hidden>
+        <p class="note" id="ownStatus"></p>
+      </div>
+    </div>
+    <div class="set">
+      <h4>Звук бусины</h4>
+      <div class="chips" id="beadChips">
+        <button class="chip" data-b="glass">Стекло, как в видео</button>
+        <button class="chip" data-b="wood">Дерево</button>
+      </div>
+    </div>
+    <div class="set">
+      <h4>Количество повторов</h4>
+      <p id="targetNote"></p>
+      <div class="chips" id="targetChips">
+        <button class="chip" data-t="33">33</button>
+        <button class="chip" data-t="99">99</button>
+        <button class="chip" data-t="100">100</button>
+        <button class="chip" data-t="1000">1000</button>
+        <input id="targetCustom" type="number" min="1" max="100000" inputmode="numeric" placeholder="своё" aria-label="Своё количество">
+      </div>
+    </div>
+    <div class="set">
+      <h4>Скорость авто-режима</h4>
+      <p>Пауза между бусинами: <b id="speedLabel">0.8 с</b></p>
+      <input type="range" id="speedRange" min="0.4" max="6" step="0.1" value="0.8" aria-label="Пауза между бусинами в секундах">
+      <label class="toggle" for="repeatT">Начинать новый круг автоматически<input type="checkbox" id="repeatT" checked></label>
+    </div>
+    <div class="set">
+      <h4>Звук и отклик</h4>
+      <label class="toggle" for="clickT">Стук бусин<input type="checkbox" id="clickT" checked></label>
+      <label class="toggle" for="chimeT">Колокольчик в конце круга<input type="checkbox" id="chimeT" checked></label>
+      <label class="toggle" for="vibeT">Вибрация (Android)<input type="checkbox" id="vibeT" checked></label>
+      <p class="note">На iPhone звук не слышен, если включён беззвучный режим (переключатель сбоку).</p>
+    </div>
+    <div class="set">
+      <h4>Статистика</h4>
+      <p id="statLine"></p>
+      <div class="bars" id="bars" aria-label="Зикры за последние 7 дней"></div>
+      <h4 style="margin-top:6px">Цель на день</h4>
+      <div class="goalbar" id="goalBar"><i></i></div>
+      <div class="chips" id="goalChips">
+        <button class="chip" data-g="0">Без цели</button>
+        <button class="chip" data-g="100">100</button>
+        <button class="chip" data-g="300">300</button>
+        <button class="chip" data-g="500">500</button>
+        <button class="chip" data-g="1000">1000</button>
+      </div>
+      <div class="form-row"><button class="mini danger" id="clearStats">Обнулить статистику</button></div>
+    </div>
+    <div class="set">
+      <h4>Перенос данных</h4>
+      <p>Ваши зикры, избранное, статистика и настройки. Скопируйте их здесь и вставьте в другой версии приложения.</p>
+      <div class="form-row"><button class="btn ghost" id="exportBtn" type="button">Скопировать мои данные</button></div>
+      <label class="field" for="importBox"><span>Вставить данные</span><textarea id="importBox" rows="3" style="font:400 12px/1.4 var(--f-ui);direction:ltr" placeholder="Вставьте сюда скопированные данные"></textarea></label>
+      <div class="form-row"><button class="btn primary" id="importBtn" type="button">Загрузить данные</button></div>
+      <p class="note" id="xferStatus">Своя музыка не переносится, её нужно загрузить заново.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+"use strict";
+
+/* ───────── data ───────── */
+const S = (ar, tr, ru, n) => ({ ar, tr, ru, n });
+
+const DHIKR = [
+  { id:"subhan", steps:[S("سُبْحَانَ اللَّهِ","СубханАллах","Пречист Аллах",33)] },
+  { id:"hamd", steps:[S("الْحَمْدُ لِلَّهِ","Альхамдулиллях","Хвала Аллаху",33)] },
+  { id:"akbar", steps:[S("اللَّهُ أَكْبَرُ","Аллаху Акбар","Аллах Велик",34)] },
+  { id:"istighfar", steps:[S("أَسْتَغْفِرُ اللَّهَ","Астагфируллах","Прошу прощения у Аллаха",100)] },
+  { id:"tahlil", steps:[S("لَا إِلَٰهَ إِلَّا اللَّهُ","Ля иляха илляЛлах","Нет божества, кроме Аллаха",100)] },
+  { id:"bihamdihi", steps:[S("سُبْحَانَ اللَّهِ وَبِحَمْدِهِ","СубханАллахи ва бихамдихи","Пречист Аллах, и хвала Ему",100)] },
+  { id:"azim", steps:[S("سُبْحَانَ اللَّهِ الْعَظِيمِ","СубханАллахиль-Азым","Пречист Аллах Великий",33)] },
+  { id:"hawqala", steps:[S("لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ","Ля хауля ва ля куввата илля биЛлях","Нет силы и мощи, кроме как у Аллаха",33)] },
+  { id:"salawat", steps:[S("اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ","Аллахумма салли аля Мухаммад","О Аллах, благослови Мухаммада",100)] },
+  { id:"hasbuna", steps:[S("حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ","Хасбуналлаху ва ни‘маль-вакиль","Нам достаточно Аллаха, и Он — лучший Покровитель",33)] },
+  { id:"yunus", steps:[S("لَا إِلَٰهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ","Ля иляха илля Анта, субханака инни кунту миназ-залимин","Нет божества, кроме Тебя. Пречист Ты, я был из несправедливых",33)] },
+];
+
+const AFTER_SALAH = { id:"after-salah", title:"Тасбих после намаза", sub:"33 + 33 + 34", steps:[
+  S("سُبْحَانَ اللَّهِ","СубханАллах","Пречист Аллах",33),
+  S("الْحَمْدُ لِلَّهِ","Альхамдулиллях","Хвала Аллаху",33),
+  S("اللَّهُ أَكْبَرُ","Аллаху Акбар","Аллах Велик",34)
+]};
+
+const D = (id, ar, tr, ru, n, src, when, title) => ({ id, kind:"dua", title, steps:[Object.assign(S(ar,tr,ru,n), { src, when })] });
+const DUAS = [
+  D("qaddara","قَدَّرَ اللَّهُ وَمَا شَاءَ فَعَلَ","Каддара-Ллаху ва ма ша’а фа‘аль","Аллах предопределил, и что пожелал — сделал",33,"Сахих Муслим","Вместо «если бы я только…», когда что-то пошло не так"),
+  D("rabbi-faqir","رَبِّ إِنِّي لِمَا أَنْزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ","Рабби инни лима анзальта иляййа мин хайрин факир","Господи, я нуждаюсь в любом благе, которое Ты ниспошлёшь мне",33,"Коран 28:24","Когда очень хотите, чтобы что-то произошло"),
+  D("ikhtar","اللَّهُمَّ اخْتَرْ لِي وَلَا تُخَيِّرْنِي","Аллахумма-хтар ли ва ля тухаййирни","О Аллах, выбери для меня лучшее и не оставляй выбор мне",33,"Тирмизи (хадис слабый)","Дуа о правильной судьбе"),
+  D("muqallib","يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ","Йа Мукаллибаль-кулюб, саббит кальби ‘аля диник","О Изменяющий сердца, укрепи моё сердце в Твоей религии",33,"Тирмизи","Дуа о защите сердца"),
+  D("hasbiya","حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ","Хасбия-Ллаху ля иляха илля Хуа, ‘алейхи таваккальту ва Хуа раббуль-‘аршиль-‘азым","Достаточно мне Аллаха, нет божества, кроме Него, на Него я полагаюсь, и Он — Господь великого Трона",7,"Абу Дауд","7 раз утром и 7 раз вечером")
+];
+
+const P = (stage, ar, tr, ru, src) => Object.assign(S(ar,tr,ru,1), { stage, src });
+const SALAWAT_IBR = ["اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ",
+  "Аллахумма салли ‘аля Мухаммадин ва ‘аля али Мухаммад, кама салляйта ‘аля Ибрахима ва ‘аля али Ибрахим, иннака Хамидун Маджид",
+  "О Аллах, благослови Мухаммада и семью Мухаммада, как Ты благословил Ибрахима и семью Ибрахима. Воистину, Ты Достохвальный, Славный"];
+const MY_KZ = { id:"my-kz", title:"Мен үшін дұға", sub:"Дуа за себя · на казахском, по частям", kind:"read", steps:[{"stage": "Бисмиллях", "ar": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", "tr": "Бисмилләһир-Рахманир-Рахим.", "ru": "", "body": "", "n": 1}, {"stage": "Хвала Аллаху", "ar": "", "tr": "", "ru": "", "body": "Уа, барлық әлемдердің Раббысы Алла Тағала! Мені жоқтан бар еткен, жанымды да, тәнімді де жаратқан, көктер мен жерді жаратқан, маған өмір сыйлаған Өзіңе сансыз шүкіршіліктер мен мақтаулар, ұлықтаулар мен пәктіктер болсын!", "n": 1}, {"stage": "Салават", "ar": "", "tr": "", "ru": "", "body": "Пайғамбарымыз Мұхаммед Мұстафаға (саллаллаһу аләйһи уә сәлләм) Алланың шексіз сәлемі мен салауаты болсын!", "n": 1}, {"stage": "Прощение", "ar": "", "tr": "", "ru": "", "body": "Уа, Аллам! Маған мейіріміңді төгіп, менің біліп-білмей, үлкенді-кішілі, жасырын-жария жасаған барлық күнәларымды кешіре гөр! Мені Өзің жақсы көретін, Өзің разы болатын құлдарыңның қатарынан ете гөр!", "n": 1}, {"stage": "Смысл жизни", "ar": "", "tr": "", "ru": "", "body": "Уа, Жаратушым! Мені махаббатыңмен жараттың. Маған екі дүниенің жақсылығын, қайырын, берекесін молынан нәсіп ете гөр! Мені не үшін жаратқан болсаң, сол мақсатыңа сай өмір сүруді, өмірімді ізгілікке арнауды нәсіп ет! Маған берген өмірімді босқа өткізуден сақта. Әрбір күнімді қайырлы, берекелі әрі Өзіңе жақындататын күндерден ете гөр!", "n": 1}, {"stage": "Прямой путь и иман", "ar": "", "tr": "", "ru": "", "body": "Уа, Аллам! Бұл дүниенің жалғандығына алданып қалудан, жамандыққа ұрынудан, адасудан сақтай гөр! Мені тек Өзіңе ғана жетелейтін тура жолға сала гөр! Жүрегімді иманмен нұрландыр, иманымды күшейт, рухымды мықты ет, күш-қуатымды арттыр! Арман-мақсаттарымды биік етіп, соларға адал жолмен жетуді нәсіп ет! Мені Өзіңді таныған, Пайғамбарыңды таныған, дініңді сүйген, ақиқатты түсінген құлдарыңнан ете гөр!", "n": 1}, {"stage": "Качества и поклонение", "ar": "", "tr": "", "ru": "", "body": "Уа, Раббым! Маған аманаттың қадірін білетін, уәдесіне берік, адал, сабырлы, байсалды, оқыған-тоқығаны мол, көзі ашық, көкірегі ояу болуды нәсіп ет! Намазымды толық оқып, оразамды ұстап, Құраныңды оқып, оны дұрыс түсініп, өмірімде амал етуді нәсіп ете гөр! Құлшылығымды қабыл етіп, жүрегіме тыныштық пен рухани күш бере гөр!", "n": 1}, {"stage": "Знание и ризк", "ar": "", "tr": "", "ru": "", "body": "Уа, Аллам! Маған пайдалы білім, берекелі ризық, адал еңбек, табысты өмір нәсіп ет! Істерімді жеңілдетіп, жолымды аш! Еңбегіме береке беріп, маған пайдалы білім үйренуді, сол білімім арқылы өзіме де, өзгелерге де пайда келтіруді нәсіп ет! Өзім армандаған мақсаттарыма қайырлы жолмен жетуді нәсіп ете гөр! Қай істі бастасам да, соңы қайырлы болсын. Маған өзім үшін қайырлысын таңдауды және Сенің таңдауыңа разы болуды үйрет!", "n": 1}, {"stage": "Здоровье и покой", "ar": "", "tr": "", "ru": "", "body": "Уа, Жаратушым! Маған денсаулық, күш-қуат, жан тыныштығын, көңіл тыныштығын нәсіп ет! Денеме саулық, жаныма тыныштық, жүрегіме сабыр, ойыма айқындық бере гөр! Мені әлсіздіктен, уайымнан, қайғыдан, қорқыныштан және үмітсіздіктен сақта! Қандай жағдай болса да, Саған деген сенімімді жоғалтпай, әрбір сынақтың артында бір қайыр бар екенін түсінетін құлдарыңнан ете гөр!", "n": 1}, {"stage": "Родители и семья", "ar": "", "tr": "", "ru": "", "body": "Уа, Аллам! Маған және отбасыма мол жақсылығыңды бере гөр! Ата-анама ұзақ ғұмыр, мықты денсаулық, жан тыныштығын, екі дүниенің бақытын нәсіп ет! Олардың маған жасаған жақсылықтарын қайтаруды, көңілдерін қуантуды, разылықтарын алуды нәсіп ет! Отбасымды барлық жамандықтан, бәле-жаладан, ауру-сырқаудан, көз тиюден және тіл-көзден сақтай гөр! Үйімізден береке, тыныштық, махаббат пен татулық кетпесін!", "n": 1}, {"stage": "Праведный супруг", "ar": "", "tr": "", "ru": "", "body": "Уа, Раббым! Маған дінімді де, дүниемді де көркейтетін, жүрегіме тыныштық сыйлайтын, иманымды арттыратын, мінезі көркем, ниеті таза, адал әрі жауапкершілігі мол, сені сүйетін және Сенен қорқатын, Сені разы етуге ұмтылатын қайырлы жар нәсіп ете гөр! Мені де сондай жарға лайықты, иманды, сабырлы, мейірімді әрі түсінігі мол жан ете гөр!", "n": 1}, {"stage": "Будущий муж", "ar": "", "tr": "", "ru": "", "body": "Уа, Аллам! Егер маған некені қайырлы еткен болсаң, маған иманды, мінезі көркем, адал, еңбекқор, жомарт, жүрегі таза, сөзі мен ісі бір жерден шығатын, мені құрметтейтін, бағалайтын, қорғайтын, маған мейіріммен қарайтын, қиындықта жанымнан табылатын, қуанышымды бөлісетін, менімен бірге Сенің разылығыңа ұмтылатын ер азаматты нәсіп ет! Оның жанында өзімді қауіпсіз, тыныш әрі қадірлі сезінуді нәсіп ет!", "n": 1}, {"stage": "Любовь в браке", "ar": "", "tr": "", "ru": "", "body": "Екеуміздің арамызға махаббат, мейірім, сыйластық пен түсіністік орнат! Бір-бірімізге қайырлы жар болып, бір-бірімізді жақсылыққа жетелейтін жандардан ете гөр! Отбасымызды берекелі, шаңырағымызды шаттыққа толы ет! Бізді бір-бірімізге сынақ емес, нығмет ете гөр! Бірге құлшылық етіп, бір-бірімізге қолдау көрсетіп, екі дүниеде де бақытты болуды нәсіп ет!", "n": 1}, {"stage": "Потомство", "ar": "", "tr": "", "ru": "", "body": "Уа, Жаратушым! Болашақ ұрпағымды иманды, дені сау, ақылды, тәрбиелі, мейірімді, мінезі көркем, ата-анасына қайырымды, дініне берік, еліне пайдалы жандардан ете гөр! Ұрпағымды Өзіңнің сүйікті құлдарыңнан етіп, олардың өміріне береке бер! Оларды жамандықтан, адасудан және барлық қауіп-қатерден сақтай гөр!", "n": 1}, {"stage": "Достаток", "ar": "", "tr": "", "ru": "", "body": "Уа, Аллам! Мені де, болашақ жарымды да, ұрпағымды да бай мұсылмандардан, мықты мұсылмандардан, күші мен мүмкіндігін жақсылыққа жұмсайтын құлдарыңнан ете гөр! Бізді сұраушылардан ғана емес, берушілерден ет! Мал-мүлкімізге береке беріп, ризық-несібемізді адал әрі молынан нәсіп ет! Байлықты жүрегімізге емес, қолымызға беріп, оны жақсылыққа, садақаға, мұқтаждарға көмек беруге жұмсауды нәсіп ет!", "n": 1}, {"stage": "Нужда только в Аллахе", "ar": "", "tr": "", "ru": "", "body": "Уа, Раббым! Мені ешкімге мұқтаж етпе, тек Өзіңе ғана мұқтаж құлдарыңнан ет! Өзгелерге қол жаймай, адал еңбегіммен өмір сүруді нәсіп ет! Маған берген нығметтеріңді бағалауды, әрбір жақсылығыңа шүкір етуді, барға қанағат етіп, жоққа сабыр етуді үйрет!", "n": 1}, {"stage": "Сокровенные желания", "ar": "", "tr": "", "ru": "", "body": "Уа, Аллам! Жүрегімдегі барша ізгі тілектерімді Өзің білесің. Айта алмаған дұғаларымды да, ішімде сақтаған арман-тілектерімді де Өзің білесің. Егер тілегендерім мен армандағандарым мен үшін қайырлы болса, оларды маған жақындата гөр. Ал егер олар мен үшін қайырсыз болса, оларды менен алыстатып, орнына одан да қайырлысын нәсіп ете гөр! Маған тағдырыма разы болатын, Сенің шешіміңе сенетін жүрек бере гөр!", "n": 1}, {"stage": "Защита", "ar": "", "tr": "", "ru": "", "body": "Уа, Аллам! Мені жаман адамдардан, жаман ниеттерден, көреалмаушылықтан, екіжүзділіктен, өсек-аяңнан, жаман көздерден және барлық жамандықтан сақта! Мені Өзіңнің қорғауыңа ал! Қайда жүрсем де, мені тура жолдан айырма. Жолымды ашып, қадамдарымды берекелі ет! Мені дүниеде де, ақыретте де жүзім жарқын болатын құлдарыңнан ете гөр!", "n": 1}, {"stage": "Рамадан", "ar": "", "tr": "", "ru": "", "body": "Уа, Рахман, Уа, Рахим! Маған Рамазан айының берекесін сезінуді, жасаған дұғаларымның қабыл болуын, құлшылықтарымның қабыл етілуін нәсіп ет! Мені Рамазанның қадірін білетін, әрбір сәтін жақсылықпен өткізетін құлдарыңнан ете гөр!", "n": 1}, {"stage": "Сердце и благой конец", "ar": "", "tr": "", "ru": "", "body": "Уа, Аллам! Маған Өзіңді ұмытпайтын жүрек, шүкір ететін тіл, құлшылық жасайтын дене, жақсылыққа ұмтылатын ниет нәсіп ет! Күнәларымды кешіріп, тәубемді қабыл ал! Мені бұл дүниеден иманмен аттанатын, соңғы демінде кәлима айтып, Өзіңнің разылығыңа бөленетін құлдарыңнан ете гөр!", "n": 1}, {"stage": "Ахират", "ar": "", "tr": "", "ru": "", "body": "Уа, Аллам! Маған екі дүниенің жақсылығын нәсіп етіп, тозақ отынан сақта! Қабірімді нұрлы, ақыретімді жеңіл ете гөр! Қиямет күні амал дәптерімді оң жағымнан беріп, Пайғамбарымыз Мұхаммедтің (саллаллаһу аләйһи уә сәлләм) шапағатына бөленуді, жәннатқа кіруді және Өзіңнің разылығыңа жетуді нәсіп ет!", "n": 1}, {"stage": "Принятие дуа", "ar": "", "tr": "", "ru": "", "body": "Уа, Раббым! Барлық дұғаларымды қабыл ете гөр! Мен үшін қайырлы болған нәрселерді маған жақындат, қайырсыз нәрселерден сақта! Әрбір ісімді Өзіңе тапсырамын. Сен — ең жақсы қорғаушысың, ең мейірімдісің, ең қайырымдысың!", "n": 1}, {"stage": "Раббана атина", "ar": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", "tr": "Раббана атина фид-дунья хасанатан, уа фил-ахирати хасанатан, уа кина азабан-нар.", "ru": "Мағынасы: «Уа, Раббымыз! Бізге бұл дүниеде де жақсылық бер, ақыретте де жақсылық бер және бізді тозақ азабынан сақта!»", "body": "", "src": "Коран 2:201", "n": 1}, {"stage": "Завершение", "ar": "آمِينَ يَا رَبَّ الْعَالَمِينَ", "tr": "Әмин, я Раббәл-ғаләмин!", "ru": "", "body": "", "n": 1}]};
+const MY_DUA = { id:"my-dua", title:"Моё дуа по порядку", sub:"Хвала → салават → имена → покаяние → просьбы → «Амин»", kind:"seq", steps:[
+  P("Хвала Аллаху","سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَٰهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ","СубханАллахи валь-хамду лилляхи ва ля иляха илляЛлаху валлаху акбар, ва ля хауля ва ля куввата илля билЛях","Пречист Аллах, хвала Аллаху, нет божества, кроме Аллаха, Аллах Велик, и нет силы и мощи, кроме как у Аллаха"),
+  P("Салават", ...SALAWAT_IBR),
+  P("Имена Аллаха","اللَّهُمَّ إِنِّي أَسْأَلُكَ بِأَنِّي أَشْهَدُ أَنَّكَ أَنْتَ اللَّهُ لَا إِلَٰهَ إِلَّا أَنْتَ الْأَحَدُ الصَّمَدُ الَّذِي لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ","Аллахумма инни ас’алюка би-анни ашхаду аннака Анта-Ллаху, ля иляха илля Анта, аль-Ахаду-с-Самад, аллязи лям ялид ва лям юляд ва лям якун ляху куфуван ахад","О Аллах, я прошу Тебя, свидетельствуя, что Ты — Аллах, нет божества, кроме Тебя, Единый, Самодостаточный, Который не родил и не был рождён, и нет никого, равного Ему","Абу Дауд, Тирмизи"),
+  P("Имена Аллаха","يَا فَتَّاحُ","Йа Фаттах","О Открывающий двери блага, открой мне то, что для меня лучше"),
+  P("Покаяние","رَبِّ اغْفِرْ لِي","Рабби-гфир ли","Господи, прости меня"),
+  P("Покаяние","اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي","Аллахумма иннака ‘Афуввун тухиббуль-‘афва фа‘фу ‘анни","О Аллах, Ты Прощающий, любишь прощать, так прости же меня","Тирмизи"),
+  P("Просьбы","رَبِّ إِنِّي لِمَا أَنْزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ","Рабби инни лима анзальта иляййа мин хайрин факир","Господи, я нуждаюсь в любом благе, которое Ты ниспошлёшь мне","Коран 28:24"),
+  P("Просьбы","اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ","Аллахумма инни ас’алюкаль-‘афия","О Аллах, я прошу у Тебя благополучия","Ибн Маджа"),
+  P("Просьбы","اللَّهُ الْمُسْتَعَانُ","Аллаху-ль-Муста‘ан","Аллах — Тот, у Кого просят помощи","Коран 12:18"),
+  P("Своими словами","","Попросите о своём","Скажите своими словами, о чём просите: для себя, родителей, близких. Можно прочитать «Мен үшін дұға». Повторите трижды"),
+  P("Завершение", ...SALAWAT_IBR),
+  P("Завершение","آمِينَ","Амин","О Аллах, прими")
+]};
+DUAS.push(
+  D("fattah","يَا فَتَّاحُ","Йа Фаттах","О Открывающий",100,"","Когда хотите, чтобы открылись двери блага"),
+  D("ighfir","رَبِّ اغْفِرْ لِي","Рабби-гфир ли","Господи, прости меня",100,"",""),
+  D("afuww","اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي","Аллахумма иннака ‘Афуввун тухиббуль-‘афва фа‘фу ‘анни","О Аллах, Ты Прощающий, любишь прощать, так прости же меня",33,"Тирмизи","Особенно в последние ночи Рамадана"),
+  D("afiya","اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ","Аллахумма инни ас’алюкаль-‘афия","О Аллах, я прошу у Тебя благополучия",33,"Ибн Маджа",""),
+  D("mustaan","اللَّهُ الْمُسْتَعَانُ","Аллаху-ль-Муста‘ан","Аллах — Тот, у Кого просят помощи",33,"Коран 12:18","В трудной ситуации"),
+  D("ism-azam","اللَّهُمَّ إِنِّي أَسْأَلُكَ بِأَنِّي أَشْهَدُ أَنَّكَ أَنْتَ اللَّهُ لَا إِلَٰهَ إِلَّا أَنْتَ الْأَحَدُ الصَّمَدُ الَّذِي لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ","Аллахумма инни ас’алюка би-анни ашхаду аннака Анта-Ллаху, ля иляха илля Анта, аль-Ахаду-с-Самад, аллязи лям ялид ва лям юляд ва лям якун ляху куфуван ахад","О Аллах, я прошу Тебя, свидетельствуя, что Ты — Аллах, нет божества, кроме Тебя, Единый, Самодостаточный, Который не родил и не был рождён, и нет никого, равного Ему",3,"Абу Дауд, Тирмизи","Дуа с величайшим именем Аллаха")
+);
+
+const NAMES_RAW = `الرحمن|Ар-Рахман|Милостивый;الرحيم|Ар-Рахим|Милующий;الملك|Аль-Малик|Царь;القدوس|Аль-Куддус|Святой;السلام|Ас-Салям|Дарующий мир;المؤمن|Аль-Му’мин|Дарующий веру и безопасность;المهيمن|Аль-Мухаймин|Охраняющий;العزيز|Аль-Азиз|Могущественный;الجبار|Аль-Джаббар|Всесильный;المتكبر|Аль-Мутакаббир|Превосходящий;الخالق|Аль-Халик|Творец;البارئ|Аль-Бари|Создатель;المصور|Аль-Мусаввир|Придающий облик;الغفار|Аль-Гаффар|Всепрощающий;القهار|Аль-Каххар|Господствующий;الوهاب|Аль-Ваххаб|Дарующий;الرزاق|Ар-Раззак|Наделяющий уделом;الفتاح|Аль-Фаттах|Открывающий;العليم|Аль-Алим|Всезнающий;القابض|Аль-Кабид|Сжимающий;الباسط|Аль-Басит|Расширяющий;الخافض|Аль-Хафид|Принижающий;الرافع|Ар-Рафи‘|Возвышающий;المعز|Аль-Му‘изз|Возвеличивающий;المذل|Аль-Музилль|Унижающий;السميع|Ас-Сами‘|Всеслышащий;البصير|Аль-Басир|Всевидящий;الحكم|Аль-Хакам|Судья;العدل|Аль-‘Адль|Справедливый;اللطيف|Аль-Латиф|Добрый, Проницательный;الخبير|Аль-Хабир|Сведущий;الحليم|Аль-Халим|Выдержанный;العظيم|Аль-‘Азым|Великий;الغفور|Аль-Гафур|Прощающий;الشكور|Аш-Шакур|Благодарный;العلي|Аль-‘Алий|Возвышенный;الكبير|Аль-Кабир|Большой;الحفيظ|Аль-Хафиз|Хранящий;المقيت|Аль-Мукит|Питающий;الحسيب|Аль-Хасиб|Достаточный;الجليل|Аль-Джалиль|Величественный;الكريم|Аль-Карим|Щедрый;الرقيب|Ар-Ракиб|Наблюдающий;المجيب|Аль-Муджиб|Отвечающий;الواسع|Аль-Васи‘|Объемлющий;الحكيم|Аль-Хаким|Мудрый;الودود|Аль-Вадуд|Любящий;المجيد|Аль-Маджид|Славный;الباعث|Аль-Ба‘ис|Воскрешающий;الشهيد|Аш-Шахид|Свидетель;الحق|Аль-Хакк|Истина;الوكيل|Аль-Вакиль|Попечитель;القوي|Аль-Кавий|Сильный;المتين|Аль-Матин|Прочный;الولي|Аль-Валий|Покровитель;الحميد|Аль-Хамид|Достохвальный;المحصي|Аль-Мухси|Ведущий счёт;المبدئ|Аль-Мубди’|Начинающий;المعيد|Аль-Му‘ид|Возвращающий;المحيي|Аль-Мухйи|Оживляющий;المميت|Аль-Мумит|Умерщвляющий;الحي|Аль-Хайй|Живой;القيوم|Аль-Каййум|Вечносущий;الواجد|Аль-Ваджид|Находящий;الماجد|Аль-Мааджид|Преславный;الواحد|Аль-Вахид|Единый;الأحد|Аль-Ахад|Единственный;الصمد|Ас-Самад|Самодостаточный;القادر|Аль-Кадир|Могущий;المقتدر|Аль-Муктадир|Всемогущий;المقدم|Аль-Мукаддим|Приближающий;المؤخر|Аль-Му’аххир|Отдаляющий;الأول|Аль-Авваль|Первый;الآخر|Аль-Ахир|Последний;الظاهر|Аз-Захир|Явный;الباطن|Аль-Батин|Скрытый;الوالي|Аль-Вали|Правитель;المتعالي|Аль-Мута‘али|Превышний;البر|Аль-Барр|Благотворящий;التواب|Ат-Тавваб|Принимающий покаяние;المنتقم|Аль-Мунтаким|Воздающий;العفو|Аль-‘Афувв|Снисходительный;الرؤوف|Ар-Ра’уф|Сострадательный;مالك الملك|Маликуль-Мульк|Владыка царства;ذو الجلال والإكرام|Зуль-Джаляли валь-Икрам|Обладатель величия и щедрости;المقسط|Аль-Муксит|Беспристрастный;الجامع|Аль-Джами‘|Собирающий;الغني|Аль-Ганий|Богатый;المغني|Аль-Мугни|Обогащающий;المانع|Аль-Мани‘|Удерживающий;الضار|Ад-Дарр|Посылающий испытание;النافع|Ан-Нафи‘|Приносящий пользу;النور|Ан-Нур|Свет;الهادي|Аль-Хади|Ведущий прямым путём;البديع|Аль-Бади‘|Создающий из ничего;الباقي|Аль-Баки|Вечный;الوارث|Аль-Варис|Наследующий;الرشيد|Ар-Рашид|Направляющий;الصبور|Ас-Сабур|Терпеливый`;
+const NAMES = { id:"names", title:"99 имён Аллаха", sub:"Асма уль-Хусна", kind:"names",
+  steps: NAMES_RAW.split(";").map(s => { const [ar,tr,ru] = s.split("|"); return S(ar,tr,ru,1); }) };
+
+const surah = (id, title, sub, rows) => ({ id, title, sub, kind:"surah",
+  steps: rows.map(([ar,tr,ru]) => S(ar,tr,ru,1)) });
+
+const SURAHS = [
+  surah("fatiha","Аль-Фатиха","Сура 1 · 7 аятов",[
+    ["بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ","Бисмилляхи-р-рахмани-р-рахим","Во имя Аллаха, Милостивого, Милующего"],
+    ["الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ","Аль-хамду лилляхи раббиль-‘алямин","Хвала Аллаху, Господу миров"],
+    ["الرَّحْمَٰنِ الرَّحِيمِ","Ар-рахмани-р-рахим","Милостивому, Милующему"],
+    ["مَالِكِ يَوْمِ الدِّينِ","Мялики яумид-дин","Властелину Дня воздаяния"],
+    ["إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ","Ийяка на‘буду ва ийяка наста‘ин","Тебе одному мы поклоняемся и Тебя одного просим о помощи"],
+    ["اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ","Ихдина-с-сыраталь-мустакым","Веди нас прямым путём"],
+    ["صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ","Сыраталь-лязина ан‘амта ‘алейхим, гайриль-магдуби ‘алейхим ва ляд-даллин","Путём тех, кого Ты облагодетельствовал, — не тех, на кого пал гнев, и не заблудших"]
+  ]),
+  surah("ikhlas","Аль-Ихлас","Сура 112 · 4 аята",[
+    ["قُلْ هُوَ اللَّهُ أَحَدٌ","Куль хуваЛлаху ахад","Скажи: «Он — Аллах Единый»"],
+    ["اللَّهُ الصَّمَدُ","Аллаху-с-самад","Аллах Самодостаточный"],
+    ["لَمْ يَلِدْ وَلَمْ يُولَدْ","Лям ялид ва лям юляд","Он не родил и не был рождён"],
+    ["وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ","Ва лям якун ляху куфуван ахад","И нет никого, равного Ему"]
+  ]),
+  surah("falaq","Аль-Фаляк","Сура 113 · 5 аятов",[
+    ["قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ","Куль а‘узу бираббиль-фаляк","Скажи: «Прибегаю к защите Господа рассвета»"],
+    ["مِنْ شَرِّ مَا خَلَقَ","Мин шарри ма халяк","От зла того, что Он сотворил"],
+    ["وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ","Ва мин шарри гасикын иза вакаб","От зла мрака, когда он наступает"],
+    ["وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ","Ва мин шарри-н-наффасати филь-‘укад","От зла колдуний, дующих на узлы"],
+    ["وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ","Ва мин шарри хасидин иза хасад","От зла завистника, когда он завидует"]
+  ]),
+  surah("nas","Ан-Нас","Сура 114 · 6 аятов",[
+    ["قُلْ أَعُوذُ بِرَبِّ النَّاسِ","Куль а‘узу бирабби-н-нас","Скажи: «Прибегаю к защите Господа людей"],
+    ["مَلِكِ النَّاسِ","Малики-н-нас","Царя людей"],
+    ["إِلَٰهِ النَّاسِ","Иляхи-н-нас","Бога людей"],
+    ["مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ","Мин шарриль-васвасиль-ханнас","От зла искусителя, отступающего при поминании Аллаха"],
+    ["الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ","Аллязи ювасвису фи судури-н-нас","Который наущает в сердцах людей"],
+    ["مِنَ الْجِنَّةِ وَالنَّاسِ","Миналь-джиннати ва-н-нас","Из джиннов и людей»"]
+  ]),
+  surah("kawthar","Аль-Каусар","Сура 108 · 3 аята",[
+    ["إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ","Инна а‘тайна кяль-каусар","Воистину, Мы даровали тебе Каусар"],
+    ["فَصَلِّ لِرَبِّكَ وَانْحَرْ","Фа-салли ли-раббика ван-хар","Так молись же своему Господу и совершай жертвоприношение"],
+    ["إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ","Инна шани’ака хуваль-абтар","Воистину, ненавистник твой сам окажется без продолжения"]
+  ]),
+  { id:"kursi", title:"Аятуль-Курси", sub:"Сура 2, аят 255", kind:"long", steps:[S(
+    "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ",
+    "Аятуль-Курси",
+    "Аллах — нет божества, кроме Него, Живого, Вседержителя. Им не овладевают ни дремота, ни сон…",3)] }
+];
+
+/* ───────── storage (best-effort) ───────── */
+const LS = {
+  get(k, d){ try{ const v = localStorage.getItem("tasbih:"+k); return v == null ? d : JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem("tasbih:"+k, JSON.stringify(v)); }catch(e){} }
+};
+
+let custom = LS.get("custom", []);
+let targets = LS.get("targets", {});
+const settings = Object.assign({ mode:"auto", speed:0.8, repeat:true, click:true, chime:true, vibe:true, sound:true, music:"cosmos", musicVol:0.7, bead:"glass" }, LS.get("settings", {}));
+if (settings.ambient === false && !settings.musicSet){ settings.music = "none"; } delete settings.ambient;
+function dayKey(d){ d = d || new Date(); return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
+let stats = Object.assign({ total:0, day:"", today:0, days:{} }, LS.get("stats", {}));
+if (!stats.days) stats.days = {};
+let favs = LS.get("favs", []);
+
+function allItems(){
+  return [MY_DUA, MY_KZ, ...DHIKR, AFTER_SALAH, ...DUAS, NAMES, ...SURAHS,
+    ...custom.map(c => ({ id:c.id, custom:true, steps:[S(c.ar||"", c.tr, c.ru||"", c.n||33)] }))];
+}
+function findItem(id){ return allItems().find(i => i.id === id) || DHIKR[0]; }
+function itemTitle(it){ return it.title || it.steps[0].tr; }
+function isSingle(it){ return it.steps.length === 1; }
+function itemTarget(it){
+  if (isSingle(it)) return Math.max(1, +(targets[it.id] || it.steps[0].n));
+  return it.steps.reduce((a,s)=>a+s.n,0);
+}
+
+/* ───────── state ───────── */
+const saved = LS.get("state", {});
+let item = findItem(saved.id || "istighfar");
+let count = Math.min(saved.count||0, itemTarget(item));
+let rounds = saved.rounds || 0;
+let tick = count;                 // global bead index (never rewinds on new round)
+let roundStart = 0;               // tick at which current round began
+let running = false;
+let nextAt = 0;
+
+function saveState(){ LS.set("state", { id:item.id, count, rounds }); }
+function saveSettings(){ LS.set("settings", settings); }
+
+/* ───────── DOM ───────── */
+const $ = id => document.getElementById(id);
+const elAr=$("ar"), elTr=$("tr"), elRu=$("ru"), elLabel=$("stepLabel");
+
+function currentStep(){
+  const T = itemTarget(item);
+  let c = count >= T ? 0 : count;
+  if (isSingle(item)) return { step:item.steps[0], idx:0 };
+  let acc = 0;
+  for (let i=0;i<item.steps.length;i++){ acc += item.steps[i].n; if (c < acc) return { step:item.steps[i], idx:i }; }
+  return { step:item.steps[item.steps.length-1], idx:item.steps.length-1 };
+}
+let lastTextKey = "";
+function renderText(force){
+  const { step, idx } = currentStep();
+  const key = item.id + ":" + idx;
+  let label = "";
+  if (item.kind === "names") label = `Имя ${idx+1} из 99`;
+  else if (item.kind === "surah") label = `${itemTitle(item)} · аят ${idx+1} из ${item.steps.length}`;
+  else if (item.kind === "long") label = itemTitle(item);
+  else if (step.stage) label = `${step.stage} · ${idx+1} из ${item.steps.length}`;
+  else if (!isSingle(item)) label = `${itemTitle(item)} · ${idx+1} из ${item.steps.length}`;
+  elLabel.textContent = label;
+  if (key === lastTextKey && !force) return;
+  lastTextKey = key;
+  try{ if (window.speechSynthesis && speechSynthesis.speaking){ speechSynthesis.cancel(); } }catch(e){}
+  $("speakBtn").classList.remove("on"); $("speakTxt").textContent = "Произношение";
+  $("speakBtn").hidden = !step.ar;
+  const len = (step.ar||"").length;
+  elAr.style.fontSize = len === 0 ? "0" : len < 22 ? "clamp(36px,11vw,56px)" : len < 45 ? "clamp(28px,8vw,44px)" : len < 90 ? "clamp(22px,6vw,32px)" : "clamp(18px,4.8vw,24px)";
+  elAr.hidden = !step.ar;
+  elAr.textContent = step.ar || "";
+  elTr.textContent = step.tr || ""; elTr.hidden = !step.tr;
+  $("body").textContent = step.body || ""; $("body").hidden = !step.body;
+  document.querySelector(".divider").hidden = !step.ar;
+  elRu.textContent = step.ru || "";
+  elRu.hidden = !step.ru;
+  $("when").textContent = step.when || ""; $("when").hidden = !step.when;
+  $("src").textContent = step.src || ""; $("src").hidden = !step.src;
+  layoutDirty = true;
+  if (!reduceMotion){
+    for (const el of [elAr, elTr, elRu]) el.animate([{opacity:0, transform:"translateY(6px)"},{opacity:1, transform:"none"}], {duration:420, easing:"ease-out"});
+  }
+}
+
+/* ───────── audio (Web Audio, synthesized) ───────── */
+let actx = null, master = null;
+function audio(){
+  if (!actx){
+    try{
+      actx = new (window.AudioContext || window.webkitAudioContext)();
+      master = actx.createGain(); master.gain.value = 0.9; master.connect(actx.destination);
+    }catch(e){ actx = null; }
+  }
+  if (actx && actx.state === "suspended" && actx.resume) { try{ const p = actx.resume(); if (p && p.catch) p.catch(()=>{}); }catch(e){} }
+  return actx;
+}
+let noiseBuf = null, brownBuf = null, irBuf = null;
+function noise(){
+  if (noiseBuf && noiseBuf.sampleRate === actx.sampleRate) return noiseBuf;
+  const n = actx.sampleRate * 2; noiseBuf = actx.createBuffer(1, n, actx.sampleRate);
+  const d = noiseBuf.getChannelData(0); for (let i=0;i<n;i++) d[i] = Math.random()*2-1;
+  return noiseBuf;
+}
+function brown(){
+  if (brownBuf && brownBuf.sampleRate === actx.sampleRate) return brownBuf;
+  const n = actx.sampleRate * 6; brownBuf = actx.createBuffer(1, n, actx.sampleRate);
+  const d = brownBuf.getChannelData(0); let l = 0;
+  for (let i=0;i<n;i++){ l = (l + 0.02*(Math.random()*2-1)) / 1.02; d[i] = l*3.5; }
+  return brownBuf;
+}
+function impulse(){
+  if (irBuf && irBuf.sampleRate === actx.sampleRate) return irBuf;
+  const sec = 4.5, n = Math.floor(actx.sampleRate*sec); irBuf = actx.createBuffer(2, n, actx.sampleRate);
+  for (let c=0;c<2;c++){ const d = irBuf.getChannelData(c); for (let i=0;i<n;i++) d[i] = (Math.random()*2-1) * Math.pow(1 - i/n, 3.2); }
+  return irBuf;
+}
+/* buses: music (with its own reverb, under one volume) and bead fx reverb */
+let musicBus = null, musicRev = null, fxRev = null;
+function ensureBuses(){
+  if (!actx) return false;
+  if (!musicBus){
+    musicBus = actx.createGain(); musicBus.gain.value = settings.musicVol; musicBus.connect(master);
+    const c1 = actx.createConvolver(); c1.buffer = impulse(); musicRev = actx.createGain(); musicRev.connect(c1); c1.connect(musicBus);
+    const c2 = actx.createConvolver(); c2.buffer = impulse(); fxRev = actx.createGain(); fxRev.gain.value = 0.35; fxRev.connect(c2); c2.connect(master);
+  }
+  return true;
+}
+
+/* bead sounds */
+function clack(t, gain, freq){
+  const o = actx.createOscillator(), g = actx.createGain();
+  o.type = "triangle"; o.frequency.setValueAtTime(freq, t); o.frequency.exponentialRampToValueAtTime(freq*0.82, t+0.05);
+  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(gain, t+0.002); g.gain.exponentialRampToValueAtTime(0.0001, t+0.07);
+  o.connect(g).connect(master); o.start(t); o.stop(t+0.09);
+  const s = actx.createBufferSource(); s.buffer = noise();
+  const bp = actx.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = freq*1.6; bp.Q.value = 4;
+  const ng = actx.createGain(); ng.gain.setValueAtTime(gain*0.9, t); ng.gain.exponentialRampToValueAtTime(0.0001, t+0.035);
+  s.connect(bp).connect(ng).connect(master); s.start(t, Math.random()); s.stop(t+0.05);
+}
+function glassTick(t){
+  // short glassy "tink" like the original video: ~1150 Hz with harmonics, a touch of room
+  const f = 1150 * (1 + (Math.random()-0.5)*0.01);
+  [[1,0.22,0.16],[2,0.12,0.11],[3.01,0.04,0.06]].forEach(([m,a,d]) => {
+    const o = actx.createOscillator(), g = actx.createGain(); o.type = "sine"; o.frequency.value = f*m;
+    g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(a,t+0.002); g.gain.exponentialRampToValueAtTime(0.0001,t+d);
+    o.connect(g); g.connect(master); g.connect(fxRev); o.start(t); o.stop(t+d+0.02);
+  });
+  const s = actx.createBufferSource(); s.buffer = noise();
+  const hp = actx.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 3000;
+  const ng = actx.createGain(); ng.gain.setValueAtTime(0.06, t); ng.gain.exponentialRampToValueAtTime(0.0001, t+0.015);
+  s.connect(hp).connect(ng).connect(master); s.start(t, Math.random()); s.stop(t+0.03);
+}
+function playClick(){
+  if (!settings.sound || !settings.click || !audio() || !ensureBuses()) return;
+  const t = actx.currentTime + 0.005;
+  if (settings.bead === "wood"){ const f = 1900 + Math.random()*250; clack(t, 0.32, f); clack(t+0.045, 0.14, f*1.12); }
+  else glassTick(t);
+}
+function playChime(){
+  if (!settings.sound || !settings.chime || !audio() || !ensureBuses()) return;
+  const t = actx.currentTime + 0.02;
+  [[523.25,0.2,3.2],[659.25,0.14,3.0],[784,0.1,2.6],[1046.5,0.06,2.2],[1563,0.025,1.2]].forEach(([f,a,d],i)=>{
+    const o = actx.createOscillator(), g = actx.createGain(); o.type="sine"; o.frequency.value=f*(1+i*0.0015);
+    g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(a,t+0.01); g.gain.exponentialRampToValueAtTime(0.0001,t+d);
+    o.connect(g); g.connect(master); g.connect(fxRev); o.start(t); o.stop(t+d+0.1);
+  });
+}
+
+/* ───────── background music: generative tracks ───────── */
+const rnd = (a,b) => a + Math.random()*(b-a);
+const pick = arr => arr[Math.floor(Math.random()*arr.length)];
+
+function padChord(out, send, freqs, t, dur, o){
+  const g = actx.createGain(), lvl = o.level;
+  g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(lvl, t+o.att);
+  g.gain.setValueAtTime(lvl, t+dur-o.rel); g.gain.linearRampToValueAtTime(0.0001, t+dur);
+  const lp = actx.createBiquadFilter(); lp.type = "lowpass"; lp.Q.value = 0.8;
+  lp.frequency.setValueAtTime(o.cut*0.55, t); lp.frequency.linearRampToValueAtTime(o.cut, t+dur*0.45); lp.frequency.linearRampToValueAtTime(o.cut*0.55, t+dur);
+  lp.connect(g); g.connect(out); const s = actx.createGain(); s.gain.value = o.send; g.connect(s); s.connect(send);
+  freqs.forEach((f,i) => {
+    [-1,1].forEach(dt => {
+      const osc = actx.createOscillator(); osc.type = i === 0 ? "sine" : o.type; osc.frequency.value = f; osc.detune.value = dt*o.detune;
+      const og = actx.createGain(); og.gain.value = (i === 0 ? 1.4 : 0.6) / freqs.length;
+      osc.connect(og); og.connect(lp); osc.start(t); osc.stop(t+dur+0.05);
+    });
+  });
+}
+function bell(out, send, f, t, o){
+  [[1,1,1],[2.0,0.3,0.6],[2.76,0.14,0.45],[5.4,0.05,0.25]].forEach(([m,a,dm]) => {
+    const osc = actx.createOscillator(), g = actx.createGain(); osc.type = "sine"; osc.frequency.value = f*m;
+    const d = o.decay*dm;
+    g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(o.level*a, t+0.004); g.gain.exponentialRampToValueAtTime(0.0001, t+d);
+    osc.connect(g); g.connect(out); const s = actx.createGain(); s.gain.value = o.send; g.connect(s); s.connect(send);
+    osc.start(t); osc.stop(t+d+0.05);
+  });
+}
+function hang(out, send, f, t, o){
+  const lp = actx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.setValueAtTime(f*6, t); lp.frequency.exponentialRampToValueAtTime(f*1.5, t+0.6);
+  const g = actx.createGain(); g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(o.level, t+0.008); g.gain.exponentialRampToValueAtTime(0.0001, t+o.decay);
+  lp.connect(g); g.connect(out); const s = actx.createGain(); s.gain.value = o.send; g.connect(s); s.connect(send);
+  [[1,1],[2,0.4],[3,0.12],[0.5,0.25]].forEach(([m,a]) => {
+    const osc = actx.createOscillator(); osc.type = "sine"; osc.frequency.value = f*m;
+    const og = actx.createGain(); og.gain.value = a; osc.connect(og); og.connect(lp); osc.start(t); osc.stop(t+o.decay+0.05);
+  });
+}
+function loopNoise(out, buf, filt, freq, q, level, lfoRate, lfoDepth){
+  const src = actx.createBufferSource(); src.buffer = buf; src.loop = true;
+  const f = actx.createBiquadFilter(); f.type = filt; f.frequency.value = freq; f.Q.value = q;
+  const g = actx.createGain(); g.gain.value = level;
+  src.connect(f); f.connect(g); g.connect(out);
+  const nodes = [src];
+  if (lfoRate){ const l = actx.createOscillator(), lg = actx.createGain(); l.frequency.value = lfoRate; lg.gain.value = level*lfoDepth; l.connect(lg); lg.connect(g.gain); l.start(); nodes.push(l); }
+  src.start(0, Math.random()*2);
+  return nodes;
+}
+function drone(out, freqs, level, type){
+  const lp = actx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 300;
+  const g = actx.createGain(); g.gain.value = level; lp.connect(g); g.connect(out);
+  return freqs.map((f,i) => { const o = actx.createOscillator(); o.type = type || "sine"; o.frequency.value = f; o.detune.value = (i-1)*4;
+    const og = actx.createGain(); og.gain.value = 1/freqs.length; o.connect(og); og.connect(lp); o.start(); return o; });
+}
+
+const TRACKS = {
+  cosmos: { title:"Космос", desc:"Глубокий гул и редкие звёздные колокольчики, как в видео",
+    make(out, send){
+      const chords = [[55,82.41,110,164.81,220],[43.65,87.31,130.81,174.61,220],[55,82.41,110,164.81,220],[49,73.42,98,146.83,196]];
+      const sparks = [880,1046.5,1174.66,1318.51,1567.98,1760,2093,2349.32];
+      const sec = 10.5; let tc = actx.currentTime + 0.05, ts = tc + 2.5, i = 0;
+      const air = loopNoise(out, noise(), "bandpass", 1400, 0.6, 0.012, 0.07, 0.6);
+      return { step(now){
+        while (tc < now + 2.5){ padChord(out, send, chords[i % chords.length], tc, sec + 5, { type:"sawtooth", cut:480, att:4.5, rel:5, level:0.55, detune:7, send:0.45 }); i++; tc += sec; }
+        while (ts < now + 2.5){ bell(out, send, pick(sparks), ts, { level:0.03, decay:3.4, send:1.1 }); ts += rnd(0.8, 2.6); }
+      }, stop(){ air.forEach(n => { try{ n.stop(); }catch(e){} }); } };
+    } },
+  nebula: { title:"Туманность", desc:"Тёплые светлые аккорды, мягко и спокойно",
+    make(out, send){
+      const chords = [[73.42,110,146.83,185,220,329.63],[61.74,92.5,123.47,146.83,185,277.18],[49,98,146.83,196,246.94,293.66],[55,110,164.81,220,277.18,329.63]];
+      const sparks = [587.33,659.25,739.99,880,987.77,1174.66,1318.51];
+      const sec = 12; let tc = actx.currentTime + 0.05, ts = tc + 4, i = 0;
+      return { step(now){
+        while (tc < now + 2.5){ padChord(out, send, chords[i % chords.length], tc, sec + 5, { type:"triangle", cut:1100, att:5, rel:5, level:0.5, detune:9, send:0.6 }); i++; tc += sec; }
+        while (ts < now + 2.5){ bell(out, send, pick(sparks), ts, { level:0.035, decay:4, send:1.2 }); ts += rnd(2, 5); }
+      }, stop(){} };
+    } },
+  desert: { title:"Ночная пустыня", desc:"Ветер и тихая восточная мелодия (лад хиджаз)",
+    make(out, send){
+      const scale = [293.66,311.13,369.99,392,440,466.16,523.25,587.33];
+      const nodes = [...drone(out, [73.42,110,146.83], 0.32, "triangle"),
+                     ...loopNoise(out, noise(), "bandpass", 700, 1.2, 0.02, 0.09, 0.8)];
+      let tn = actx.currentTime + 2, idx = 4;
+      return { step(now){
+        while (tn < now + 2.5){
+          idx = Math.max(0, Math.min(scale.length-1, idx + pick([-2,-1,-1,1,1,2,0])));
+          hang(out, send, scale[idx], tn, { level:0.1, decay:2.6, send:0.8 });
+          if (Math.random() < 0.25) hang(out, send, scale[idx]/2, tn, { level:0.04, decay:3, send:0.6 });
+          tn += pick([0.8,1.2,1.6,1.6,2.4,3.2]);
+        }
+      }, stop(){ nodes.forEach(n => { try{ n.stop(); }catch(e){} }); } };
+    } },
+  ocean: { title:"Глубина", desc:"Шум волн и низкий гул, без мелодии",
+    make(out, send){
+      const nodes = [...loopNoise(out, brown(), "lowpass", 520, 0.5, 0.22, 0.11, 0.85),
+                     ...loopNoise(out, noise(), "bandpass", 2500, 0.4, 0.006, 0.11, 0.9),
+                     ...drone(out, [41.2,61.74,82.41], 0.25, "sine")];
+      let tb = actx.currentTime + 6;
+      return { step(now){
+        while (tb < now + 2.5){ bell(out, send, pick([329.63,392,493.88,659.25]), tb, { level:0.02, decay:5, send:1.3 }); tb += rnd(9, 18); }
+      }, stop(){ nodes.forEach(n => { try{ n.stop(); }catch(e){} }); } };
+    } },
+  own: { title:"Своя музыка", desc:"Любой аудиофайл с телефона",
+    make(out){
+      if (!ownBuffer) return { step(){}, stop(){} };
+      const src = actx.createBufferSource(); src.buffer = ownBuffer; src.loop = true; src.connect(out); src.start();
+      return { step(){}, stop(){ try{ src.stop(); }catch(e){} } };
+    } },
+  none: { title:"Без музыки", desc:"Только звук бусин" }
+};
+
+let music = null, schedTimer = null;
+function startMusic(){
+  if (music || !settings.sound || settings.music === "none" || !audio() || !ensureBuses()) return;
+  const tr = TRACKS[settings.music] || TRACKS.cosmos;
+  if (!tr.make) return;
+  if (settings.music === "own" && !ownBuffer){ loadOwn().then(ok => { if (ok) startMusic(); }); return; }
+  const t = actx.currentTime, out = actx.createGain();
+  out.gain.setValueAtTime(0.0001, t); out.gain.exponentialRampToValueAtTime(1, t+2.5); out.connect(musicBus);
+  const send = actx.createGain(); send.gain.value = 1; send.connect(musicRev);
+  const inst = tr.make(out, send);
+  inst.step(actx.currentTime);
+  schedTimer = setInterval(() => inst.step(actx.currentTime), 250);
+  music = { out, send, inst };
+}
+function stopMusic(){
+  if (!music) return;
+  clearInterval(schedTimer); schedTimer = null;
+  const m = music; music = null; const n = actx.currentTime;
+  m.out.gain.cancelScheduledValues(n); m.out.gain.setValueAtTime(Math.max(0.0001, m.out.gain.value), n); m.out.gain.exponentialRampToValueAtTime(0.0001, n+1.2);
+  setTimeout(() => { m.inst.stop(); try{ m.out.disconnect(); m.send.disconnect(); }catch(e){} }, 1400);
+}
+function syncAmbient(){ if (settings.sound && settings.music !== "none" && actx) startMusic(); else stopMusic(); }
+function restartMusic(){ stopMusic(); audio(); syncAmbient(); }
+function setMusicVol(v){ settings.musicVol = v; saveSettings(); if (musicBus) musicBus.gain.setTargetAtTime(v, actx.currentTime, 0.1); }
+
+/* own file: stored in IndexedDB, decoded on demand */
+let ownBuffer = null, ownName = LS.get("ownName", "");
+function idb(){ return new Promise((res, rej) => { try{ const r = indexedDB.open("tasbih", 1); r.onupgradeneeded = () => r.result.createObjectStore("files"); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }catch(e){ rej(e); } }); }
+async function idbPut(k, v){ const db = await idb(); return new Promise((res, rej) => { const tx = db.transaction("files","readwrite"); tx.objectStore("files").put(v, k); tx.oncomplete = res; tx.onerror = () => rej(tx.error); }); }
+async function idbGet(k){ const db = await idb(); return new Promise((res, rej) => { const r = db.transaction("files").objectStore("files").get(k); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); }
+function decode(buf){ return new Promise((res, rej) => { const p = actx.decodeAudioData(buf, res, rej); if (p && p.then) p.then(res, rej); }); }
+async function loadOwn(){
+  try{ if (!audio()) return false; const ab = await idbGet("own"); if (!ab) return false; ownBuffer = await decode(ab.slice(0)); return true; }
+  catch(e){ return false; }
+}
+async function useOwnFile(file){
+  const st = $("ownStatus");
+  if (!file) return;
+  if (file.size > 40*1024*1024){ st.textContent = "Файл больше 40 МБ. Выберите трек покороче."; return; }
+  st.textContent = "Загружаю…";
+  try{
+    audio();
+    const ab = await file.arrayBuffer();
+    ownBuffer = await decode(ab.slice(0));
+    ownName = file.name; LS.set("ownName", ownName);
+    try{ await idbPut("own", ab); }catch(e){}
+    settings.music = "own"; saveSettings(); restartMusic(); renderMusicPane();
+  }catch(e){ st.textContent = "Не получилось прочитать этот файл. Подойдёт mp3, m4a или wav."; }
+}
+
+function vibrate(p){ if (!settings.vibe) return; try{ navigator.vibrate && navigator.vibrate(p); }catch(e){} }
+
+window.__tasbihRender = async (name, sec) => {   // test hook: render a track offline
+  const keep = [actx, master, musicBus, musicRev, fxRev];
+  actx = new OfflineAudioContext(2, 44100*sec, 44100); master = actx.createGain(); master.connect(actx.destination); musicBus = null;
+  ensureBuses(); const out = actx.createGain(); out.connect(musicBus); const send = actx.createGain(); send.connect(musicRev);
+  const inst = TRACKS[name].make(out, send); for (let t=0; t<sec; t+=0.25) inst.step(t);
+  const buf = await actx.startRendering();
+  [actx, master, musicBus, musicRev, fxRev] = keep;
+  const d = buf.getChannelData(0); let s = 0, pk = 0; for (const v of d){ s += v*v; pk = Math.max(pk, Math.abs(v)); }
+  return { rms: 20*Math.log10(Math.sqrt(s/d.length)), peak: pk };
+};
+/* ───────── counting ───────── */
+let goalFlash = -1e9, completeFlash = -1e9, lastBump = -10, ripples = [], plusOnes = [];
+function bumpToday(){
+  const d = dayKey();
+  if (stats.day !== d){ stats.day = d; stats.today = 0; }
+  stats.today++; stats.total++;
+  stats.days[d] = (stats.days[d] || 0) + 1;
+  const keys = Object.keys(stats.days).sort(); while (keys.length > 60) delete stats.days[keys.shift()];
+  LS.set("stats", stats);
+  if (settings.goal && stats.today === settings.goal){ playChime(); vibrate([60,80,60,80,60]); goalFlash = performance.now(); }
+}
+function increment(){
+  const T = itemTarget(item);
+  if (count >= T){ count = 0; roundStart = tick; }
+  count++; tick++;
+  bumpToday();
+  const now = performance.now();
+  lastBump = now; ripples.push(now); plusOnes.push(now);
+  playClick(); vibrate(12);
+  if (count >= T){
+    rounds++; completeFlash = now; playChime(); vibrate([40,60,40]);
+    if (running){ if (settings.repeat) nextAt = now + 1800; else setRunning(false); }
+  }
+  renderText(); saveState(); updateToday();
+}
+function undo(){
+  if (count <= 0) return;
+  if (count >= itemTarget(item) && rounds > 0) rounds--;
+  count--; tick--; renderText(); saveState();
+}
+function resetCount(){ count = 0; rounds = 0; roundStart = tick; renderText(true); saveState(); }
+function selectItem(id){
+  item = findItem(id); count = 0; rounds = 0; roundStart = tick; lastTextKey = "";
+  renderText(true); saveState(); renderList(); renderTargetPane();
+}
+
+/* auto mode */
+function stepDelay(){
+  if (item.kind !== "read" && item.kind !== "seq") return settings.speed;
+  const { step } = currentStep();
+  const chars = (step.body||"").length + (step.tr||"").length + (step.ar||"").length*1.5;
+  return Math.max(settings.speed, chars/14);
+}
+let wakeLock = null;
+async function lockScreen(on){
+  try{
+    if (on && "wakeLock" in navigator && !wakeLock){ wakeLock = await navigator.wakeLock.request("screen"); wakeLock.addEventListener("release", ()=>{ wakeLock=null; }); }
+    if (!on && wakeLock){ await wakeLock.release(); wakeLock = null; }
+  }catch(e){ wakeLock = null; }
+}
+function setRunning(on){
+  running = on;
+  $("icPlay").toggleAttribute("hidden", on); $("icPause").toggleAttribute("hidden", !on);
+  $("playBtn").setAttribute("aria-label", on ? "Пауза" : "Старт");
+  if (on){ audio(); syncAmbient(); nextAt = performance.now() + 250; }
+  lockScreen(on);
+}
+document.addEventListener("visibilitychange", ()=>{ if (document.visibilityState === "visible" && running) lockScreen(true); });
+
+function setMode(m){
+  settings.mode = m; saveSettings();
+  $("modeAuto").setAttribute("aria-pressed", m==="auto"); $("modeTap").setAttribute("aria-pressed", m==="tap");
+  const auto = m === "auto";
+  $("playBtn").hidden = !auto; $("speedBox").hidden = !auto;
+  $("tapHint").hidden = auto; $("undoBtn").hidden = auto; $("today").hidden = auto;
+  if (!auto) setRunning(false);
+  updateToday();
+}
+function fmtSpeed(v){ return (Math.round(v*10)/10).toFixed(1).replace(".0", "") + " с"; }
+function setSpeed(v){
+  v = Math.min(6, Math.max(0.4, Math.round(v*10)/10)); settings.speed = v; saveSettings();
+  $("speedVal").textContent = fmtSpeed(v); $("speedLabel").textContent = fmtSpeed(v); $("speedRange").value = v;
+}
+function todayCount(){ return stats.day === dayKey() ? stats.today : 0; }
+function updateToday(){ $("today").textContent = "Сегодня " + todayCount() + (settings.goal ? " / " + settings.goal : ""); }
+
+/* pronunciation: device speech engine, Arabic voice */
+let arVoice = null, ruVoice = null;
+function pickVoices(){
+  try{
+    const vs = speechSynthesis.getVoices();
+    arVoice = vs.find(v => /^ar/i.test(v.lang) && /SA/i.test(v.lang)) || vs.find(v => /^ar/i.test(v.lang)) || null;
+    ruVoice = vs.find(v => /^ru/i.test(v.lang)) || null;
+  }catch(e){}
+}
+if ("speechSynthesis" in window){ pickVoices(); try{ speechSynthesis.onvoiceschanged = pickVoices; }catch(e){} }
+function speakStep(){
+  const btn = $("speakBtn"), txt = $("speakTxt");
+  if (!("speechSynthesis" in window)){ txt.textContent = "Озвучка недоступна"; return; }
+  try{
+    if (speechSynthesis.speaking){ speechSynthesis.cancel(); btn.classList.remove("on"); txt.textContent = "Произношение"; return; }
+    pickVoices();
+    const { step } = currentStep();
+    const useAr = !!step.ar;
+    const u = new SpeechSynthesisUtterance(useAr ? step.ar : step.tr);
+    u.lang = useAr ? (arVoice ? arVoice.lang : "ar-SA") : "ru-RU";
+    if (useAr && arVoice) u.voice = arVoice; if (!useAr && ruVoice) u.voice = ruVoice;
+    u.rate = settings.sayRate || 0.75; u.pitch = 1;
+    u.onstart = () => { btn.classList.add("on"); txt.textContent = "Звучит…"; };
+    u.onend = () => { btn.classList.remove("on"); txt.textContent = "Произношение"; };
+    u.onerror = () => { btn.classList.remove("on"); txt.textContent = arVoice ? "Произношение" : "Нет арабского голоса"; };
+    if (useAr && !arVoice && speechSynthesis.getVoices().length) txt.textContent = "Нет арабского голоса";
+    speechSynthesis.speak(u);
+  }catch(e){ txt.textContent = "Озвучка недоступна"; }
+}
+$("speakBtn").onclick = speakStep;
+
+/* stage input */
+const stop = e => e.stopPropagation();
+document.querySelectorAll(".app button, .app label, .app input").forEach(el => el.addEventListener("pointerdown", stop));
+window.addEventListener("pointerdown", e => {
+  if (!$("sheet").hidden) return;
+  if (e.target.closest("button, input, label, .sheet, .body")) return;
+  if (settings.mode !== "tap") return;   // in auto mode only the Start/Pause button controls the counter
+  audio(); syncAmbient();
+  increment();
+});
+window.addEventListener("keydown", e => {
+  if (!$("sheet").hidden){ if (e.key === "Escape") closeSheet(); return; }
+  if (e.target.closest && e.target.closest("input, textarea")) return;
+  if (e.code === "Space" || e.key === "Enter"){
+    if (e.target.closest && e.target.closest("button")) return;
+    e.preventDefault(); audio(); syncAmbient();
+    if (settings.mode === "tap") increment(); else setRunning(!running);
+  }
+  if (e.key === "Backspace") undo();
+});
+
+$("modeAuto").onclick = () => setMode("auto");
+$("modeTap").onclick = () => setMode("tap");
+$("playBtn").onclick = () => { audio(); setRunning(!running); };
+$("resetBtn").onclick = resetCount;
+$("undoBtn").onclick = undo;
+$("slower").onclick = () => setSpeed(settings.speed + (settings.speed >= 2 ? 0.5 : 0.1));
+$("faster").onclick = () => setSpeed(settings.speed - (settings.speed > 2 ? 0.5 : 0.1));
+$("soundBtn").onclick = () => {
+  settings.sound = !settings.sound; saveSettings(); audio(); syncAmbient(); renderSoundIcon();
+};
+function renderSoundIcon(){ $("soundOn").toggleAttribute("hidden", !settings.sound); $("soundOff").toggleAttribute("hidden", settings.sound); $("soundBtn").setAttribute("aria-label", settings.sound ? "Выключить звук" : "Включить звук"); }
+
+/* ───────── sheet ───────── */
+function openSheet(tab){
+  if (running) setRunning(false);
+  $("scrim").hidden = false; $("sheet").hidden = false; showTab(tab);
+}
+function closeSheet(){ $("scrim").hidden = true; $("sheet").hidden = true; editingId = null; }
+function showTab(tab){
+  $("tabList").setAttribute("aria-selected", tab==="list"); $("tabSettings").setAttribute("aria-selected", tab==="settings"); $("tabDua").setAttribute("aria-selected", tab==="dua");
+  $("paneList").hidden = tab!=="list"; $("paneSettings").hidden = tab!=="settings"; $("paneDua").hidden = tab!=="dua";
+  if (tab === "list") renderList(); else if (tab === "settings") { renderMusicPane(); renderTargetPane(); renderStats(); }
+}
+$("openList").onclick = () => openSheet("list");
+$("openSettings").onclick = () => openSheet("settings");
+$("closeSheet").onclick = closeSheet; $("scrim").onclick = closeSheet;
+$("tabDua").onclick = () => showTab("dua");
+$("startKz").onclick = () => { selectItem("my-kz"); setMode("tap"); closeSheet(); };
+$("startMyDua").onclick = () => { selectItem("my-dua"); setMode("tap"); closeSheet(); };
+$("tabList").onclick = () => showTab("list"); $("tabSettings").onclick = () => showTab("settings");
+
+let editingId = null;
+const STAR = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg>';
+const STAR_O = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg>';
+function rowFor(it, sub){
+  const line = document.createElement("div"); line.className = "row-line";
+  const fav = favs.includes(it.id);
+  const st = document.createElement("button"); st.type = "button"; st.className = "star"; st.setAttribute("aria-pressed", fav);
+  st.setAttribute("aria-label", fav ? "Убрать из избранного" : "В избранное"); st.innerHTML = fav ? STAR : STAR_O;
+  st.onclick = () => { favs = fav ? favs.filter(x => x !== it.id) : [...favs, it.id]; LS.set("favs", favs); const y = $("paneList").scrollTop; renderList(); $("paneList").scrollTop = y; };
+  const b = document.createElement("button"); b.className = "row"; b.type = "button";
+  if (it.id === item.id) b.setAttribute("aria-current","true");
+  const left = document.createElement("div"); left.style.minWidth = "0";
+  const t = document.createElement("div"); t.className = "t"; t.textContent = itemTitle(it); left.appendChild(t);
+  const s0 = it.steps[0];
+  if (s0.ar && isSingle(it) && it.kind !== "long"){ const a = document.createElement("div"); a.className = "a"; a.textContent = s0.ar; left.appendChild(a); }
+  const subText = sub || it.sub || (isSingle(it) ? s0.ru : "");
+  if (subText){ const s = document.createElement("div"); s.className = "s"; s.textContent = subText; left.appendChild(s); }
+  const n = document.createElement("span"); n.className = "n";
+  n.textContent = it.kind === "surah" ? it.steps.length + " аят." : (it.kind === "seq" || it.kind === "read") ? it.steps.length + " част." : "×" + itemTarget(it);
+  if (s0.when && isSingle(it)){ const w = document.createElement("div"); w.className = "w"; w.textContent = s0.when; left.appendChild(w); }
+  b.append(left, n);
+  b.onclick = () => { selectItem(it.id); closeSheet(); };
+  line.append(b, st);
+  return line;
+}
+function group(title, nodes){
+  const g = document.createElement("div"); g.className = "group";
+  const h = document.createElement("h3"); h.textContent = title; g.appendChild(h);
+  const l = document.createElement("div"); l.className = "list"; nodes.forEach(n => l.appendChild(n)); g.appendChild(l);
+  return g;
+}
+function renderList(){
+  const pane = $("paneList"); pane.textContent = "";
+  // custom first so it's easy to reach
+  const mine = custom.map(c => {
+    const it = findItem(c.id);
+    const wrap = document.createElement("div"); wrap.className = "row-wrap";
+    wrap.appendChild(rowFor(it));
+    const acts = document.createElement("div"); acts.className = "row-actions";
+    const ed = document.createElement("button"); ed.className = "mini"; ed.type="button"; ed.textContent = "Изменить";
+    ed.onclick = () => { editingId = c.id; renderList(); setTimeout(()=>{ $("fTr").focus(); }, 30); };
+    const del = document.createElement("button"); del.className = "mini danger"; del.type="button"; del.textContent = "Удалить";
+    del.onclick = () => {
+      if (!del.classList.contains("armed")){ del.classList.add("armed"); del.textContent = "Точно удалить?"; setTimeout(()=>{ del.classList.remove("armed"); del.textContent="Удалить"; }, 3000); return; }
+      custom = custom.filter(x => x.id !== c.id); LS.set("custom", custom); delete targets[c.id]; LS.set("targets", targets);
+      if (item.id === c.id) selectItem("istighfar"); renderList();
+    };
+    acts.append(ed, del); wrap.appendChild(acts);
+    return wrap;
+  });
+  const favItems = favs.map(id => allItems().find(i => i.id === id)).filter(Boolean);
+  if (favItems.length) pane.appendChild(group("Избранное", favItems.map(i => rowFor(i))));
+  pane.appendChild(group("Мои зикры", mine));
+  pane.appendChild(buildForm());
+  pane.appendChild(group("Зикры", [rowFor(AFTER_SALAH), ...DHIKR.map(d => rowFor(d))]));
+  pane.appendChild(group("Дуа", [rowFor(MY_DUA, "Ваши дуа в правильном порядке: от хвалы до «Амин»"), rowFor(MY_KZ), ...DUAS.map(d => rowFor(d))]));
+  pane.appendChild(group("Имена Аллаха", [rowFor(NAMES, "Все 99 имён по порядку, с переводом")]));
+  pane.appendChild(group("Суры", SURAHS.map(s => rowFor(s))));
+  const note = document.createElement("p"); note.className = "note";
+  note.textContent = "В сурах счётчик идёт по аятам, а один полный круг означает одно прочтение суры. Переводы смыслов приведены кратко.";
+  pane.appendChild(note);
+}
+function buildForm(){
+  const ed = editingId ? custom.find(c => c.id === editingId) : null;
+  const f = document.createElement("form"); f.className = "add"; f.noValidate = true;
+  f.innerHTML = `
+    <div class="group"><h3 style="margin:0">${ed ? "Изменить зикр" : "Добавить свой зикр"}</h3></div>
+    <label class="field"><span>Название или транскрипция *</span><input id="fTr" maxlength="120" placeholder="Например: СубханАллахи ва бихамдихи"></label>
+    <label class="field"><span>Арабский текст</span><textarea id="fAr" maxlength="1200" rows="2" placeholder="سُبْحَانَ اللَّهِ"></textarea></label>
+    <label class="field"><span>Перевод или заметка</span><input id="fRu" maxlength="240" placeholder="Пречист Аллах, и хвала Ему"></label>
+    <label class="field"><span>Сколько раз</span><input id="fN" type="number" min="1" max="100000" inputmode="numeric" value="33"></label>
+    <div class="form-row"><button class="btn primary" type="submit">${ed ? "Сохранить" : "Добавить и открыть"}</button>${ed ? '<button class="btn ghost" type="button" id="fCancel">Отмена</button>' : ""}</div>
+    <p class="note" id="fErr" hidden></p>`;
+  if (ed){ f.querySelector("#fTr").value = ed.tr; f.querySelector("#fAr").value = ed.ar || ""; f.querySelector("#fRu").value = ed.ru || ""; f.querySelector("#fN").value = ed.n; }
+  f.addEventListener("submit", e => {
+    e.preventDefault();
+    const tr = f.querySelector("#fTr").value.trim(), ar = f.querySelector("#fAr").value.trim(), ru = f.querySelector("#fRu").value.trim();
+    const n = Math.max(1, Math.min(100000, parseInt(f.querySelector("#fN").value, 10) || 33));
+    if (!tr){ const er = f.querySelector("#fErr"); er.hidden = false; er.textContent = "Впишите название или транскрипцию — так зикр появится в списке."; return; }
+    let id;
+    if (ed){ Object.assign(ed, { tr, ar, ru, n }); id = ed.id; delete targets[id]; LS.set("targets", targets); }
+    else { id = "c" + Date.now().toString(36); custom.push({ id, tr, ar, ru, n }); }
+    LS.set("custom", custom); editingId = null; selectItem(id); closeSheet();
+  });
+  const c = f.querySelector("#fCancel"); if (c) c.onclick = () => { editingId = null; renderList(); };
+  return f;
+}
+
+
+/* music pane */
+function renderMusicPane(){
+  const box = $("trackList"); box.textContent = "";
+  Object.entries(TRACKS).forEach(([key, tr]) => {
+    const b = document.createElement("button"); b.type = "button"; b.className = "track"; b.setAttribute("role","radio");
+    b.setAttribute("aria-checked", settings.music === key);
+    const t = document.createElement("b"); t.textContent = tr.title;
+    const d = document.createElement("small"); d.textContent = key === "own" && ownName ? ownName : tr.desc;
+    b.append(t, d);
+    b.onclick = () => {
+      if (key === "own" && !ownName){ $("ownFile").click(); return; }
+      settings.music = key; settings.musicSet = true; saveSettings();
+      if (!settings.sound){ settings.sound = true; saveSettings(); renderSoundIcon(); }
+      restartMusic(); renderMusicPane();
+    };
+    box.appendChild(b);
+  });
+  $("musicVol").value = settings.musicVol;
+  $("ownStatus").textContent = ownName ? "Загружено: " + ownName + ". Можно заменить другим файлом." : "mp3, m4a или wav до 40 МБ. Файл хранится только на этом телефоне.";
+  $("beadChips").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", settings.bead === c.dataset.b));
+}
+$("musicVol").addEventListener("input", e => setMusicVol(+e.target.value));
+$("ownFile").addEventListener("change", e => { const f = e.target.files && e.target.files[0]; if (f){ settings.musicSet = true; useOwnFile(f); } e.target.value = ""; });
+$("beadChips").querySelectorAll(".chip").forEach(c => c.onclick = () => { settings.bead = c.dataset.b; saveSettings(); renderMusicPane(); playClick(); });
+
+/* settings pane */
+function renderTargetPane(){
+  const single = isSingle(item), T = itemTarget(item);
+  $("targetNote").textContent = single ? `Для «${itemTitle(item)}»: сейчас ${T}` : `«${itemTitle(item)}» идёт по своему порядку: ${T} в круге.`;
+  $("targetChips").querySelectorAll("button, input").forEach(el => el.disabled = !single);
+  $("targetChips").querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", single && +b.dataset.t === T));
+  $("targetCustom").value = single && ![33,99,100,1000].includes(T) ? T : "";
+}
+function setTarget(n){
+  if (!isSingle(item)) return;
+  n = Math.max(1, Math.min(100000, n|0)); targets[item.id] = n; LS.set("targets", targets);
+  if (count > n) count = n; renderTargetPane(); saveState();
+}
+$("targetChips").querySelectorAll(".chip").forEach(b => b.onclick = () => setTarget(+b.dataset.t));
+$("targetCustom").addEventListener("change", e => { const v = parseInt(e.target.value,10); if (v > 0) setTarget(v); });
+$("speedRange").addEventListener("input", e => setSpeed(+e.target.value));
+[["repeatT","repeat"],["clickT","click"],["chimeT","chime"],["vibeT","vibe"]].forEach(([id,k]) => {
+  $(id).checked = !!settings[k];
+  $(id).addEventListener("change", e => { settings[k] = e.target.checked; saveSettings(); });
+});
+function renderStats(){
+  const t = todayCount();
+  let streak = 0; for (let i=0;i<400;i++){ const dd = new Date(); dd.setDate(dd.getDate()-i); const c = stats.days[dayKey(dd)] || 0; if (c > 0) streak++; else if (i > 0) break; }
+  $("statLine").textContent = `Сегодня: ${t} · За всё время: ${stats.total}` + (streak > 1 ? ` · Дней подряд: ${streak}` : "");
+  const bars = $("bars"); bars.textContent = "";
+  const wd = ["вс","пн","вт","ср","чт","пт","сб"], vals = [];
+  for (let i=6;i>=0;i--){ const dd = new Date(); dd.setDate(dd.getDate()-i); vals.push([wd[dd.getDay()], stats.days[dayKey(dd)] || 0]); }
+  const mx = Math.max(1, ...vals.map(v => v[1]));
+  vals.forEach(([w,c]) => { const b = document.createElement("div"); b.className = "bar" + (c ? "" : " zero");
+    const n = document.createElement("b"); n.textContent = c || ""; const i = document.createElement("i"); i.style.height = Math.max(3, c/mx*60) + "px";
+    const l = document.createElement("span"); l.textContent = w; b.append(n, i, l); bars.appendChild(b); });
+  $("goalBar").hidden = !settings.goal;
+  $("goalBar").firstElementChild.style.width = settings.goal ? Math.min(100, t/settings.goal*100) + "%" : "0";
+  $("goalChips").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", (settings.goal||0) === +c.dataset.g));
+}
+$("goalChips").querySelectorAll(".chip").forEach(c => c.onclick = () => { settings.goal = +c.dataset.g; saveSettings(); renderStats(); updateToday(); });
+/* data transfer via clipboard */
+function exportData(){
+  const out = {};
+  try{ for (let i=0;i<localStorage.length;i++){ const k = localStorage.key(i); if (k.startsWith("tasbih:")) out[k] = localStorage.getItem(k); } }catch(e){}
+  return JSON.stringify({ tasbih:1, data: out });
+}
+$("exportBtn").onclick = () => {
+  const txt = exportData(), st = $("xferStatus");
+  $("importBox").value = txt;
+  const done = () => { st.textContent = "Скопировано. Откройте новое приложение → Настройки → «Вставить данные»."; };
+  try{
+    navigator.clipboard.writeText(txt).then(done, () => { $("importBox").select(); st.textContent = "Выделите текст в поле выше и скопируйте его вручную."; });
+  }catch(e){ $("importBox").select(); st.textContent = "Выделите текст в поле выше и скопируйте его вручную."; }
+};
+$("importBtn").onclick = () => {
+  const st = $("xferStatus");
+  try{
+    const obj = JSON.parse($("importBox").value.trim());
+    if (!obj || obj.tasbih !== 1 || !obj.data) throw 0;
+    Object.entries(obj.data).forEach(([k,v]) => { if (k.startsWith("tasbih:")) localStorage.setItem(k, v); });
+    st.textContent = "Данные загружены. Перезапускаю…";
+    setTimeout(() => location.reload(), 700);
+  }catch(e){ st.textContent = "Не получилось прочитать данные. Скопируйте их ещё раз целиком."; }
+};
+
+$("clearStats").onclick = e => {
+  const b = e.currentTarget;
+  if (!b.classList.contains("armed")){ b.classList.add("armed"); b.textContent = "Нажмите ещё раз"; setTimeout(()=>{ b.classList.remove("armed"); b.textContent = "Обнулить статистику"; }, 3000); return; }
+  stats = { total:0, day:"", today:0, days:{} }; LS.set("stats", stats); renderStats(); updateToday();
+  b.classList.remove("armed"); b.textContent = "Обнулить статистику";
+};
+
+/* ───────── canvas scene ───────── */
+const cv = $("sky"), ctx = cv.getContext("2d");
+const reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+let W=0, H=0, DPR=1, bg=null, layoutDirty=true, L={};
+let stars=[], planets=[];
+
+function rand(a,b){ return a + Math.random()*(b-a); }
+function buildBackground(){
+  const lw = Math.max(40, Math.ceil(W/7)), lh = Math.max(60, Math.ceil(H/7));
+  const lo = document.createElement("canvas"); lo.width = lw; lo.height = lh; const g = lo.getContext("2d");
+  let lin = g.createLinearGradient(0,0,0,lh); lin.addColorStop(0,"#0b1519"); lin.addColorStop(.45,"#15242b"); lin.addColorStop(1,"#1a1d22");
+  g.fillStyle = lin; g.fillRect(0,0,lw,lh);
+  const blob = (x,y,r,c) => { const rg = g.createRadialGradient(x,y,0,x,y,r); rg.addColorStop(0,c); rg.addColorStop(1,"rgba(0,0,0,0)"); g.fillStyle = rg; g.fillRect(0,0,lw,lh); };
+  // teal clouds
+  blob(lw*.15, lh*.12, lw*.55, "rgba(70,120,128,.38)");
+  blob(lw*.85, lh*.42, lw*.5, "rgba(60,105,118,.32)");
+  blob(lw*.3, lh*.62, lw*.45, "rgba(55,95,108,.3)");
+  // dusty band, lower-left → upper-right
+  for (let i=0;i<14;i++){
+    const t = i/13, x = lw*(-0.1 + 1.25*t) + rand(-lw*.05, lw*.05), y = lh*(0.52 - 0.42*t) + rand(-lh*.03, lh*.03);
+    blob(x, y, lw*rand(.16,.26), `rgba(${150+rand(-20,20)|0},${80+rand(-15,15)|0},55,${rand(.16,.3).toFixed(2)})`);
+  }
+  for (let i=0;i<6;i++){ const t=i/5; blob(lw*(-0.05+1.15*t), lh*(0.5-0.4*t)+lh*.05, lw*.1, "rgba(10,14,18,.35)"); }
+  // warm glow near the bottom (sun)
+  blob(lw*.5, lh*.88, lw*.75, "rgba(205,95,55,.42)");
+  blob(lw*.5, lh*1.02, lw*.5, "rgba(240,120,70,.35)");
+  // upscale twice for a soft blur
+  const mid = document.createElement("canvas"); mid.width = Math.ceil(W/3); mid.height = Math.ceil(H/3);
+  const m = mid.getContext("2d"); m.imageSmoothingQuality = "high"; m.drawImage(lo,0,0,mid.width,mid.height);
+  bg = document.createElement("canvas"); bg.width = Math.ceil(W*DPR*1.08); bg.height = Math.ceil(H*DPR*1.08);
+  const b = bg.getContext("2d"); b.imageSmoothingQuality = "high"; b.drawImage(mid,0,0,bg.width,bg.height);
+  // fine static stars
+  const sc = DPR*1.08, n = Math.round(W*H/2200);
+  for (let i=0;i<n;i++){ b.fillStyle = `rgba(230,240,245,${rand(.15,.6).toFixed(2)})`; const r = rand(.3,.9)*sc; b.beginPath(); b.arc(rand(0,bg.width), rand(0,bg.height*.8), r, 0, 7); b.fill(); }
+  stars = Array.from({length: Math.round(W*H/9000)}, () => ({ x:rand(0,W), y:rand(0,H*.7), r:rand(.6,1.6), p:rand(0,6.28), s:rand(.6,2) }));
+}
+function buildPlanets(){
+  const base = Math.min(W, 560);
+  planets = [
+    { rx:.17, sp:.55, r:3.2, c:["#ffe1c6","#e08a62"], a:rand(0,6) },
+    { rx:.24, sp:.42, r:2.4, c:["#ffb69c","#c2452a"], a:rand(0,6) },
+    { rx:.31, sp:.33, r:4.2, c:["#d6f0f4","#5c8f9a"], a:rand(0,6) },
+    { rx:.40, sp:.25, r:3.0, c:["#ff9d7a","#a83a1c"], a:rand(0,6) },
+    { rx:.50, sp:.18, r:7.5, c:["#ffd9b8","#b86a44"], a:rand(0,6), band:true },
+    { rx:.61, sp:.13, r:6.2, c:["#ffe8d2","#d39a74"], a:rand(0,6), ring:true },
+    { rx:.73, sp:.09, r:4.0, c:["#cfeaf0","#4f8592"], a:rand(0,6) },
+  ].map(p => ({...p, rx:p.rx*base, r:p.r*Math.max(.8, base/400)}));
+}
+function resize(){
+  DPR = Math.min(2, window.devicePixelRatio || 1);
+  W = window.innerWidth; H = window.innerHeight;
+  cv.width = Math.round(W*DPR); cv.height = Math.round(H*DPR);
+  buildBackground(); buildPlanets(); layoutDirty = true;
+}
+function computeLayout(){
+  const words = $("words").getBoundingClientRect(), bottom = $("bottom").getBoundingClientRect();
+  const free = bottom.top - words.bottom;
+  const cx = W/2;
+  const sag = Math.min(70, Math.max(34, H*.06));
+  const topY = words.bottom + Math.max(26, free*.08);
+  const beadY = topY + sag;
+  const spacing = Math.max(22, Math.min(34, W/15));
+  const R = Math.max(30, Math.min(46, W*.085));
+  const counterY = beadY + Math.max(R+40, free*.2);
+  const sunY = Math.max(counterY + R + 90, bottom.top - Math.max(40, free*.12));
+  L = { cx, sag, topY, beadY, spacing, R, counterY, sunY };
+  layoutDirty = false;
+}
+function curveY(x){
+  const u = (x - L.cx) / (W/2);
+  return L.topY + L.sag * (0.55*Math.exp(-u*u/0.09) + 0.45*Math.max(0, 1-u*u));
+}
+function bead(x, y, r, orange, glow){
+  if (glow){ ctx.save(); ctx.shadowColor = orange ? "rgba(255,110,50,.8)" : "rgba(160,220,232,.55)"; ctx.shadowBlur = r*1.6; }
+  const g = ctx.createRadialGradient(x - r*.38, y - r*.42, r*.08, x, y, r);
+  if (orange){ g.addColorStop(0,"#fff0e2"); g.addColorStop(.22,"#ffa877"); g.addColorStop(.62,"#ef5a22"); g.addColorStop(1,"#7a2008"); }
+  else { g.addColorStop(0,"#f2fbfc"); g.addColorStop(.22,"#bfe0e6"); g.addColorStop(.66,"#6f9ea8"); g.addColorStop(1,"#2a4a52"); }
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2); ctx.fill();
+  if (glow) ctx.restore();
+  ctx.fillStyle = "rgba(255,255,255,.55)"; ctx.beginPath(); ctx.ellipse(x - r*.35, y - r*.42, r*.22, r*.13, -0.6, 0, Math.PI*2); ctx.fill();
+}
+function tassel(x, y, r){
+  const len = r*3.2, top = y + r*.8, w1 = r*.35, w2 = r*.85;
+  const g = ctx.createLinearGradient(0, top, 0, top+len); g.addColorStop(0,"rgba(255,140,90,.95)"); g.addColorStop(1,"rgba(255,140,90,.05)");
+  ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(x-w1, top); ctx.lineTo(x+w1, top); ctx.lineTo(x+w2, top+len); ctx.lineTo(x-w2, top+len); ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = "rgba(255,210,180,.35)"; ctx.lineWidth = .8;
+  for (let i=-2;i<=2;i++){ ctx.beginPath(); ctx.moveTo(x + i*w1*.4, top+2); ctx.lineTo(x + i*w2*.4, top+len*.92); ctx.stroke(); }
+}
+
+let pos = 0, t0 = performance.now(), last = t0, orbitBoost = 0;
+function frame(now){
+  const dt = Math.min(0.05, (now - last)/1000); last = now;
+  const t = (now - t0)/1000;
+  if (layoutDirty) computeLayout();
+
+  // auto counting
+  if (running && settings.mode === "auto" && now >= nextAt){ increment(); if (running && nextAt <= now) nextAt = now + stepDelay()*1000; }
+
+  pos += (tick - pos) * (1 - Math.exp(-dt*(reduceMotion ? 30 : 11)));
+  if (Math.abs(tick - pos) < 0.001) pos = tick;
+  const since = (now - lastBump)/1000;
+  orbitBoost = Math.max(0, 1 - since/0.8);
+
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  // background with slow drift
+  const dx = reduceMotion ? 0 : Math.sin(t*0.03)*W*0.025, dy = reduceMotion ? 0 : Math.cos(t*0.025)*H*0.015;
+  ctx.drawImage(bg, -W*0.04 + dx, -H*0.04 + dy, W*1.08, H*1.08);
+  // twinkles
+  for (const s of stars){ const a = reduceMotion ? .5 : .25 + .45*(0.5+0.5*Math.sin(t*s.s + s.p)); ctx.fillStyle = `rgba(235,245,250,${a.toFixed(3)})`; ctx.beginPath(); ctx.arc(s.x, s.y, s.r*.6, 0, 7); ctx.fill(); }
+
+  drawSolar(t, now);
+  drawBeads(now);
+  drawCounter(now);
+
+  requestAnimationFrame(frame);
+}
+
+function drawSolar(t, now){
+  const { cx, sunY } = L, base = Math.min(W, 560);
+  // haze
+  let rg = ctx.createRadialGradient(cx, sunY, 0, cx, sunY, base*.75);
+  rg.addColorStop(0,"rgba(255,120,60,.30)"); rg.addColorStop(.5,"rgba(200,90,50,.12)"); rg.addColorStop(1,"rgba(0,0,0,0)");
+  ctx.fillStyle = rg; ctx.fillRect(0, sunY - base*.75, W, base*1.5);
+  // rays
+  ctx.save(); ctx.translate(cx, sunY); ctx.rotate(reduceMotion ? 0 : t*0.04);
+  for (let i=0;i<12;i++){
+    ctx.rotate(Math.PI*2/12);
+    const len = base*(.32 + .1*Math.sin(i*1.7 + t*.6));
+    const g = ctx.createLinearGradient(0,0,0,-len); g.addColorStop(0,"rgba(255,170,120,.14)"); g.addColorStop(1,"rgba(255,170,120,0)");
+    ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(-6,0); ctx.lineTo(-base*.035,-len); ctx.lineTo(base*.035,-len); ctx.lineTo(6,0); ctx.fill();
+  }
+  ctx.restore();
+  // orbits
+  ctx.lineWidth = 1;
+  for (const p of planets){ ctx.strokeStyle = "rgba(255,225,205,.11)"; ctx.beginPath(); ctx.ellipse(cx, sunY, p.rx, p.rx*.26, 0, 0, Math.PI*2); ctx.stroke(); }
+  const speed = reduceMotion ? 0.15 : 1 + orbitBoost*2.2;
+  const dtp = 1/60;
+  for (const p of planets) p.a += p.sp * dtp * speed * 0.35;
+  const drawP = p => {
+    const x = cx + Math.cos(p.a)*p.rx, y = sunY + Math.sin(p.a)*p.rx*.26, depth = 0.8 + 0.3*(0.5+0.5*Math.sin(p.a)), r = p.r*depth;
+    if (p.ring){ ctx.strokeStyle = "rgba(255,225,200,.7)"; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.ellipse(x, y, r*2.1, r*.6, -0.25, Math.PI, Math.PI*2); ctx.stroke(); }
+    const g = ctx.createRadialGradient(x - r*.4, y - r*.4, r*.1, x, y, r); g.addColorStop(0,p.c[0]); g.addColorStop(1,p.c[1]);
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2); ctx.fill();
+    if (p.band){ ctx.save(); ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.clip(); ctx.fillStyle="rgba(120,50,30,.35)"; ctx.fillRect(x-r, y-r*.25, r*2, r*.18); ctx.fillRect(x-r, y+r*.2, r*2, r*.14); ctx.restore(); }
+    if (p.ring){ ctx.strokeStyle = "rgba(255,225,200,.7)"; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.ellipse(x, y, r*2.1, r*.6, -0.25, 0, Math.PI); ctx.stroke(); }
+  };
+  planets.filter(p => Math.sin(p.a) < 0).forEach(drawP);
+  // sun
+  const pulse = 1 + orbitBoost*0.12 + (now - completeFlash < 1600 ? 0.35*(1-(now-completeFlash)/1600) : 0);
+  const sr = Math.max(22, base*.065) * pulse;
+  rg = ctx.createRadialGradient(cx, sunY, 0, cx, sunY, sr*3);
+  rg.addColorStop(0,"rgba(255,200,150,.9)"); rg.addColorStop(.25,"rgba(255,110,50,.55)"); rg.addColorStop(1,"rgba(255,80,30,0)");
+  ctx.fillStyle = rg; ctx.beginPath(); ctx.arc(cx, sunY, sr*3, 0, 7); ctx.fill();
+  rg = ctx.createRadialGradient(cx - sr*.25, sunY - sr*.3, sr*.1, cx, sunY, sr);
+  rg.addColorStop(0,"#fff4e8"); rg.addColorStop(.35,"#ffa06a"); rg.addColorStop(.8,"#ff5a1f"); rg.addColorStop(1,"#e0400f");
+  ctx.fillStyle = rg; ctx.beginPath(); ctx.arc(cx, sunY, sr, 0, 7); ctx.fill();
+  planets.filter(p => Math.sin(p.a) >= 0).forEach(drawP);
+}
+
+function drawBeads(now){
+  const { cx, spacing } = L, T = itemTarget(item);
+  const half = Math.ceil(W/2/spacing) + 2;
+  const k0 = Math.floor(pos) - half, k1 = Math.ceil(pos) + half;
+  const pts = [];
+  for (let k=k0;k<=k1;k++){
+    const x = cx + (k - pos)*spacing;
+    const d = (x - cx)/spacing;
+    const sc = 1 + 0.55*Math.exp(-d*d/1.1);
+    pts.push({ k, x, y: curveY(x), r: spacing*.34*sc, d });
+  }
+  // string
+  ctx.strokeStyle = "rgba(200,232,238,.35)"; ctx.lineWidth = 1.2; ctx.beginPath();
+  pts.forEach((p,i) => i ? ctx.lineTo(p.x,p.y) : ctx.moveTo(p.x,p.y)); ctx.stroke();
+  // halo rings at the center bead
+  const cy = curveY(cx), hr = spacing*.34*1.55;
+  ctx.strokeStyle = "rgba(200,235,240,.18)"; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(cx, cy, hr*1.9, 0, 7); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx, cy, hr*1.45, 0, 7); ctx.stroke();
+  const cg = ctx.createRadialGradient(cx, cy, 0, cx, cy, hr*2.6); cg.addColorStop(0,"rgba(170,225,235,.18)"); cg.addColorStop(1,"rgba(170,225,235,0)");
+  ctx.fillStyle = cg; ctx.beginPath(); ctx.arc(cx, cy, hr*2.6, 0, 7); ctx.fill();
+  // ripples
+  ripples = ripples.filter(r0 => now - r0 < 900);
+  for (const r0 of ripples){ const p = (now - r0)/900; ctx.strokeStyle = `rgba(210,240,245,${(0.5*(1-p)).toFixed(3)})`; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(cx, cy, hr*(1.2 + p*1.6), 0, 7); ctx.stroke(); }
+  // beads: far ones first, center last
+  const sorted = pts.slice().sort((a,b) => Math.abs(b.d) - Math.abs(a.d));
+  for (const p of sorted){
+    const marker = ((p.k - roundStart) % T + T) % T === 0;
+    if (marker) tassel(p.x, p.y, p.r);
+    bead(p.x, p.y, p.r, marker, Math.abs(p.d) < 0.6 || marker);
+  }
+  // +1
+  plusOnes = plusOnes.filter(p0 => now - p0 < 800);
+  for (const p0 of plusOnes){ const p = (now - p0)/800; ctx.fillStyle = `rgba(255,140,90,${(1-p).toFixed(3)})`; ctx.font = `700 ${Math.round(spacing*.42)}px Montserrat, sans-serif`; ctx.textAlign = "left"; ctx.fillText("+1", cx + hr*1.1, cy - hr*1.05 - p*16); }
+}
+
+function drawCounter(now){
+  const { cx, counterY:y, R } = L, T = itemTarget(item);
+  const flash = now - completeFlash < 1600 ? 1 - (now - completeFlash)/1600 : 0;
+  ctx.fillStyle = "rgba(8,14,18,.72)"; ctx.beginPath(); ctx.arc(cx, y, R, 0, 7); ctx.fill();
+  ctx.strokeStyle = "rgba(220,240,244,.16)"; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(cx, y, R, 0, 7); ctx.stroke();
+  const frac = Math.min(1, count / T), a0 = -Math.PI/2, a1 = a0 + frac*Math.PI*2;
+  if (frac > 0){
+    const g = ctx.createLinearGradient(cx - R, y - R, cx + R, y + R); g.addColorStop(0,"#ffd2b5"); g.addColorStop(1,"#ff5a1f");
+    ctx.save(); ctx.shadowColor = "rgba(255,100,40,.7)"; ctx.shadowBlur = 8 + flash*20;
+    ctx.strokeStyle = g; ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.beginPath(); ctx.arc(cx, y, R, a0, a1); ctx.stroke(); ctx.restore();
+    ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(cx + Math.cos(a1)*R, y + Math.sin(a1)*R, 2.6, 0, 7); ctx.fill();
+  }
+  if (flash > 0){ ctx.strokeStyle = `rgba(255,150,100,${(flash*.6).toFixed(3)})`; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(cx, y, R + (1-flash)*30, 0, 7); ctx.stroke(); }
+  ctx.textAlign = "center"; ctx.textBaseline = "alphabetic"; ctx.fillStyle = "#f6fafb";
+  const big = String(count).length > 4 ? R*.5 : String(count).length > 3 ? R*.62 : R*.82;
+  ctx.font = `800 ${Math.round(big)}px Montserrat, sans-serif`; ctx.fillText(count, cx, y + big*.28);
+  ctx.fillStyle = "rgba(226,238,240,.6)"; ctx.font = `500 ${Math.round(R*.26)}px Montserrat, sans-serif`; ctx.fillText("/" + T, cx, y + big*.28 + R*.34);
+  if (rounds > 0 || flash > 0){
+    ctx.fillStyle = flash > 0 ? `rgba(255,178,127,${(0.6+0.4*flash).toFixed(3)})` : "rgba(226,238,240,.55)";
+    ctx.font = `600 ${Math.max(11, Math.round(R*.28))}px Montserrat, sans-serif`;
+    const word = item.kind === "surah" || item.kind === "long" ? "прочтение" : "круг";
+    ctx.fillText(flash > 0 ? `Круг завершён · ${rounds}` : `${word} ${rounds}`, cx, y + R + 22);
+  }
+  if (now - goalFlash < 4000){
+    const gp = (now - goalFlash)/4000;
+    ctx.fillStyle = `rgba(255,178,127,${(1-gp).toFixed(3)})`; ctx.font = `700 ${Math.max(12, Math.round(R*.32))}px Montserrat, sans-serif`;
+    ctx.fillText("Цель дня выполнена", cx, y + R + 44);
+  }
+}
+
+/* ───────── boot ───────── */
+window.addEventListener("resize", () => { resize(); });
+if (window.ResizeObserver) new ResizeObserver(() => { layoutDirty = true; }).observe($("words"));
+resize();
+setSpeed(settings.speed);
+setMode(settings.mode);
+renderSoundIcon();
+renderText(true);
+updateToday();
+(document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => { layoutDirty = true; });
+requestAnimationFrame(frame);
+})();
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(() => {}); });
+}
+</script>
+</body>
+</html>

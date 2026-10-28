@@ -1,5 +1,5 @@
 // Тасбих: работа без интернета
-const CACHE = "tasbih-2d5ad20e";
+const CACHE = "tasbih-a7021ae4";
 const ASSETS = ["./", "index.html", "manifest.webmanifest", "fonts/amiri-arabic-400-normal.woff2", "fonts/amiri-arabic-700-normal.woff2", "fonts/amiri-latin-400-normal.woff2", "fonts/amiri-latin-700-normal.woff2", "fonts/montserrat-cyrillic-ext-wght-normal.woff2", "fonts/montserrat-cyrillic-wght-normal.woff2", "fonts/montserrat-latin-ext-wght-normal.woff2", "fonts/montserrat-latin-wght-normal.woff2", "icons/icon-180.png", "icons/icon-192.png", "icons/icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });

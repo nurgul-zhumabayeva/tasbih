@@ -567,7 +567,7 @@ function audio(){
       master = actx.createGain(); master.gain.value = 0.9; master.connect(actx.destination);
     }catch(e){ actx = null; }
   }
-  if (actx && actx.state === "suspended" && actx.resume) { try{ const p = actx.resume(); if (p && p.catch) p.catch(()=>{}); }catch(e){} }
+  if (actx && actx.state !== "running" && actx.resume) { try{ const p = actx.resume(); if (p && p.catch) p.catch(()=>{}); }catch(e){} }
   return actx;
 }
 let noiseBuf = null, brownBuf = null, irBuf = null;
@@ -920,6 +920,22 @@ function speakStep(){
   }catch(e){ txt.textContent = "Озвучка недоступна"; }
 }
 $("speakBtn").onclick = speakStep;
+
+/* iPhone audio unlock: play through the silent switch and start audio on a real tap (touchend/click) */
+function setPlaybackSession(){ try{ if (navigator.audioSession && navigator.audioSession.type !== "playback") navigator.audioSession.type = "playback"; }catch(e){} }
+setPlaybackSession();
+let unlocked = false;
+function unlockAudio(){
+  setPlaybackSession();
+  const a = audio(); if (!a) return;
+  if (!unlocked){
+    try{ const b = a.createBuffer(1, 1, 22050), src = a.createBufferSource(); src.buffer = b; src.connect(a.destination); src.start(0); unlocked = true; }catch(e){}
+  }
+  syncAmbient();
+}
+document.addEventListener("touchend", unlockAudio, { capture:true, passive:true });
+document.addEventListener("click", unlockAudio, true);
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && actx && actx.state !== "running"){ try{ actx.resume().catch(()=>{}); }catch(e){} } });
 
 /* stage input */
 const stop = e => e.stopPropagation();
@@ -1396,7 +1412,9 @@ requestAnimationFrame(frame);
 
 <script>
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(() => {}); });
+  const hadController = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener("controllerchange", () => { if (hadController && !window.__reloaded){ window.__reloaded = true; location.reload(); } });
+  window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").then(r => r.update && r.update()).catch(() => {}); });
 }
 </script>
 </body>

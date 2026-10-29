@@ -1090,7 +1090,8 @@ function pools(){
     sunnah: SUNNAHS.map((_,i) => "sunnah-"+i)
   };
 }
-const ROT = [["name","Имя дня"],["dhikr","Зикр дня"],["dua","Дуа дня"],["surah","Сура дня"],["sunnah","Сунна дня"]];
+const ROT = [["name","Имя дня"],["dhikr","Зикр дня"],["dua","Дуа дня"],["surah","Сура дня"]];
+function isSurahDay(d){ d = d || new Date(); return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5) % 2 === 0; }
 function dayKeyOf(d){ return "day:" + dayKey(d); }
 function loadDay(){
   const k = dayKeyOf(); let d = LS.get(k.slice(0) , null);
@@ -1109,7 +1110,7 @@ function pruneDays(){
 }
 function dayTasks(d){
   const t = fixedList.map(f => ({ key:"f:"+f.id, id:f.id, need:f.need||1, fixed:true }));
-  ROT.forEach(([kind,label]) => { const id = d.rot[kind]; if (id) t.push({ key:"r:"+kind, id, need:1, rot:kind, label }); });
+  ROT.forEach(([kind,label]) => { if (kind === "surah" && !isSurahDay()) return; const id = d.rot[kind]; if (id) t.push({ key:"r:"+kind, id, need:1, rot:kind, label }); });
   (d.extra||[]).forEach(x => t.push({ key:"x:"+x.id, id:x.id, need:x.need||1, extra:true }));
   return t;
 }
@@ -1207,7 +1208,9 @@ function renderDay(){
   const editBtn = document.createElement("button"); editBtn.type = "button"; editBtn.className = "mini"; editBtn.style.marginTop = "8px";
   editBtn.textContent = dayEdit ? "Готово" : "Изменить обязательные"; editBtn.onclick = () => { dayEdit = !dayEdit; renderDay(); };
   sec("Обязательные · каждый день", tasks.filter(t => t.fixed), editBtn);
-  sec("Сегодня · меняется каждый день", tasks.filter(t => t.rot));
+  const surNote = document.createElement("p"); surNote.className = "note"; surNote.style.marginTop = "8px";
+  surNote.textContent = isSurahDay() ? "Сура дня бывает через день, следующая — послезавтра." : "Сура дня бывает через день, следующая — завтра.";
+  sec("Сегодня · меняется каждый день", tasks.filter(t => t.rot), surNote);
   const ex = tasks.filter(t => t.extra); if (ex.length) sec("Добавлено на сегодня", ex);
   // add form
   const f = document.createElement("form"); f.className = "dadd"; f.noValidate = true;
@@ -1678,7 +1681,12 @@ requestAnimationFrame(frame);
 if ("serviceWorker" in navigator) {
   const hadController = !!navigator.serviceWorker.controller;
   navigator.serviceWorker.addEventListener("controllerchange", () => { if (hadController && !window.__reloaded){ window.__reloaded = true; location.reload(); } });
-  window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").then(r => r.update && r.update()).catch(() => {}); });
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).then(r => {
+      r.update && r.update();
+      document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") r.update().catch(() => {}); });
+    }).catch(() => {});
+  });
 }
 </script>
 </body>

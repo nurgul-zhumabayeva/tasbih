@@ -50,6 +50,41 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);overflow:hidd
 
 /* top bar */
 .top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-block:10px 4px;}
+.icon-btn{position:relative;}
+.badge{position:absolute;top:-6px;right:-10px;min-width:18px;padding:3px 6px;border-radius:999px;background:var(--ember);color:#fff;font:700 10px/1 var(--f-ui);font-variant-numeric:tabular-nums;box-shadow:0 2px 8px rgba(255,90,30,.5);pointer-events:none;}
+.badge.full{background:#2f9e74;box-shadow:0 2px 8px rgba(47,158,116,.5);}
+.day .dhead{display:flex;flex-direction:column;gap:6px;}
+.day .ddate{font:700 18px/1.2 var(--f-ui);}
+.day .dhijri{font:400 12.5px/1.3 var(--f-ui);color:var(--ink-soft);}
+.dprog{display:flex;align-items:center;gap:12px;}
+.dprog .goalbar{flex:1;}
+.dprog b{font:700 13px/1 var(--f-ui);font-variant-numeric:tabular-nums;white-space:nowrap;}
+.dweek{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+.dweek div{display:flex;flex-direction:column;align-items:center;gap:4px;font:500 10px/1 var(--f-ui);color:var(--ink-faint);}
+.dweek i{width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.14);display:block;}
+.dweek i.part{border-color:var(--ember-soft);background:conic-gradient(var(--ember) var(--p), transparent 0);}
+.dweek i.full{border-color:#2f9e74;background:#2f9e74;}
+.task{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px 10px 10px 8px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid transparent;}
+.task.done{background:rgba(47,158,116,.08);border-color:rgba(47,158,116,.3);}
+.task .chk{width:34px;height:34px;border-radius:50%;border:2px solid rgba(226,238,240,.3);background:transparent;cursor:pointer;display:grid;place-items:center;color:#fff;flex:none;}
+.task.done .chk{background:#2f9e74;border-color:#2f9e74;}
+.task .chk svg{width:16px;height:16px;}
+.task .info{min-width:0;cursor:pointer;display:flex;flex-direction:column;gap:2px;}
+.task .kind{font:700 10px/1 var(--f-ui);letter-spacing:.12em;text-transform:uppercase;color:var(--ember-soft);}
+.task .tt{font:600 14px/1.25 var(--f-ui);}
+.task.done .tt{color:var(--ink-soft);}
+.task .ts{font:300 12px/1.35 var(--f-ui);color:var(--ink-soft);}
+.task .ta{font:700 16px/1.4 var(--f-ar);direction:rtl;color:var(--ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;}
+.task .acts{display:flex;gap:6px;}
+.task .act{width:34px;height:34px;border-radius:50%;border:1px solid var(--glass-line);background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;}
+.task .act svg{width:15px;height:15px;}
+.task .act.go{background:linear-gradient(180deg,#ff8a50,#e2511c);border:0;color:#fff;}
+.task .act.rm{color:#ffb4a0;}
+.task .act.rm.armed{background:#c9401a;color:#fff;}
+.dadd{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:16px;background:rgba(255,255,255,.035);border:1px dashed rgba(255,178,127,.35);}
+.dadd select{background:rgba(0,0,0,.25);border:1px solid var(--glass-line);border-radius:10px;color:var(--ink);font:400 15px/1.3 var(--f-ui);padding:10px 12px;width:100%;}
+.dadd .form-row{align-items:center;justify-content:space-between;}
+.alldone{padding:14px;border-radius:16px;background:rgba(47,158,116,.12);border:1px solid rgba(47,158,116,.4);font:600 14px/1.4 var(--f-ui);text-align:center;}
 .icon-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--glass-line);background:var(--glass);
   color:var(--ink);display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
 .icon-btn svg{width:20px;height:20px;}
@@ -188,7 +223,8 @@ input[type=range]{width:100%;accent-color:var(--ember);}
 
 <div class="app" id="app">
   <div class="top">
-    <button class="icon-btn" id="openList" aria-label="Список зикров">
+    <button class="icon-btn" id="openList" aria-label="Мой день и список зикров">
+      <span class="badge" id="dayBadge" hidden></span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
     </button>
     <div class="seg" role="group" aria-label="Режим счёта">
@@ -252,8 +288,9 @@ input[type=range]{width:100%;accent-color:var(--ember);}
 <section class="sheet" id="sheet" hidden aria-label="Меню">
   <div class="sheet-head">
     <div class="tabs" role="tablist">
-      <button role="tab" id="tabList" aria-selected="true">Зикры</button>
-      <button role="tab" id="tabDua" aria-selected="false">Как делать дуа</button>
+      <button role="tab" id="tabDay" aria-selected="true">Мой день</button>
+      <button role="tab" id="tabList" aria-selected="false">Зикры</button>
+      <button role="tab" id="tabDua" aria-selected="false">Дуа</button>
       <button role="tab" id="tabSettings" aria-selected="false">Настройки</button>
     </div>
     <button class="icon-btn" id="closeSheet" aria-label="Закрыть">
@@ -261,9 +298,11 @@ input[type=range]{width:100%;accent-color:var(--ember);}
     </button>
   </div>
 
-  <div class="sheet-body" id="paneList"></div>
+  <div class="sheet-body day" id="paneDay"></div>
+  <div class="sheet-body" id="paneList" hidden></div>
 
   <div class="sheet-body guide" id="paneDua" hidden>
+    <div class="group"><h3 style="margin:0">Как делать дуа</h3></div>
     <button class="btn primary" id="startMyDua" type="button">Читать моё дуа по порядку</button>
     <button class="btn ghost" id="startKz" type="button">Мен үшін дұға — дуа за себя</button>
     <ol>
@@ -324,7 +363,8 @@ input[type=range]{width:100%;accent-color:var(--ember);}
     <div class="set">
       <h4>Скорость авто-режима</h4>
       <p>Пауза между бусинами: <b id="speedLabel">0.8 с</b></p>
-      <input type="range" id="speedRange" min="0.4" max="6" step="0.1" value="0.8" aria-label="Пауза между бусинами в секундах">
+      <input type="range" id="speedRange" min="0.4" max="30" step="0.1" value="0.8" aria-label="Пауза между бусинами в секундах">
+      <label class="toggle" for="adaptT">Длинным аятам и дуа давать больше времени<input type="checkbox" id="adaptT" checked></label>
       <label class="toggle" for="repeatT">Начинать новый круг автоматически<input type="checkbox" id="repeatT" checked></label>
     </div>
     <div class="set">
@@ -378,6 +418,7 @@ const DHIKR = [
   { id:"hawqala", steps:[S("لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ","Ля хауля ва ля куввата илля биЛлях","Нет силы и мощи, кроме как у Аллаха",33)] },
   { id:"salawat", steps:[S("اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ","Аллахумма салли аля Мухаммад","О Аллах, благослови Мухаммада",100)] },
   { id:"hasbuna", steps:[S("حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ","Хасбуналлаху ва ни‘маль-вакиль","Нам достаточно Аллаха, и Он — лучший Покровитель",33)] },
+  { id:"tahlil-mulk", steps:[S("لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ","Ля иляха илляЛлаху вахдаху ля шарика лях, ляхуль-мульку ва ляхуль-хамд, ва Хуа ‘аля кулли шай’ин кадир","Нет божества, кроме одного Аллаха, у Него нет сотоварища. Ему принадлежит власть и хвала, и Он над всем властен",100)] },
   { id:"yunus", steps:[S("لَا إِلَٰهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ","Ля иляха илля Анта, субханака инни кунту миназ-залимин","Нет божества, кроме Тебя. Пречист Ты, я был из несправедливых",33)] },
 ];
 
@@ -416,6 +457,8 @@ const MY_DUA = { id:"my-dua", title:"Моё дуа по порядку", sub:"Х
   P("Завершение","آمِينَ","Амин","О Аллах, прими")
 ]};
 DUAS.push(
+  D("sayyid-istighfar","اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَٰهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَىٰ عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ","Аллахумма Анта Рабби, ля иляха илля Анта, халяктани ва ана ‘абдука, ва ана ‘аля ‘ахдика ва ва‘дика маста-та‘ту, а‘узу бика мин шарри ма сана‘ту, абу’у ляка би-ни‘матика ‘аляййа, ва абу’у би-занби, фагфир ли, фа-иннаху ля ягфируз-зунуба илля Анта","О Аллах, Ты мой Господь, нет божества, кроме Тебя. Ты создал меня, и я Твой раб, и я верен договору с Тобой, насколько могу. Прибегаю к Тебе от зла того, что я сделал. Признаю Твою милость ко мне и признаю свой грех — прости же меня, ведь никто не прощает грехи, кроме Тебя",1,"Бухари","Лучшая мольба о прощении — утром и вечером","Сайид аль-истигфар"),
+  D("rabbana-atina","رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ","Раббана атина фид-дунья хасанатан ва филь-ахирати хасанатан ва кына ‘азабан-нар","Господь наш, даруй нам благо в этом мире и благо в Последней жизни и защити нас от мук Огня",7,"Коран 2:201","Самое частое дуа Пророка ﷺ"),
   D("fattah","يَا فَتَّاحُ","Йа Фаттах","О Открывающий",100,"","Когда хотите, чтобы открылись двери блага"),
   D("ighfir","رَبِّ اغْفِرْ لِي","Рабби-гфир ли","Господи, прости меня",100,"",""),
   D("afuww","اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي","Аллахумма иннака ‘Афуввун тухиббуль-‘афва фа‘фу ‘анни","О Аллах, Ты Прощающий, любишь прощать, так прости же меня",33,"Тирмизи","Особенно в последние ночи Рамадана"),
@@ -467,11 +510,33 @@ const SURAHS = [
     ["فَصَلِّ لِرَبِّكَ وَانْحَرْ","Фа-салли ли-раббика ван-хар","Так молись же своему Господу и совершай жертвоприношение"],
     ["إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ","Инна шани’ака хуваль-абтар","Воистину, ненавистник твой сам окажется без продолжения"]
   ]),
+  surah("asr","Аль-Аср","Сура 103 · 3 аята",[
+    ["وَالْعَصْرِ","Валь-‘аср","Клянусь предвечерним временем"],
+    ["إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ","Инналь-инсана лафи хуср","Воистину, человек в убытке"],
+    ["إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ","Илляль-лязина аману ва ‘амилю-с-салихати ва тавасау биль-хакки ва тавасау би-с-сабр","Кроме тех, которые уверовали, совершали праведные дела, заповедали друг другу истину и заповедали терпение"]
+  ]),
+  surah("nasr","Ан-Наср","Сура 110 · 3 аята",[
+    ["إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ","Иза джа’а насру-Ллахи валь-фатх","Когда придёт помощь Аллаха и победа"],
+    ["وَرَأَيْتَ النَّاسَ يَدْخُلُونَ فِي دِينِ اللَّهِ أَفْوَاجًا","Ва ра’айтан-наса ядхулюна фи дини-Ллахи афваджа","И ты увидишь, как люди толпами принимают религию Аллаха"],
+    ["فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ ۚ إِنَّهُ كَانَ تَوَّابًا","Фа-саббих би-хамди Раббика вастагфирх, иннаху кана тавваба","То прославляй хвалой своего Господа и проси у Него прощения. Воистину, Он — Принимающий покаяние"]
+  ]),
+  surah("kafirun","Аль-Кафирун","Сура 109 · 6 аятов",[
+    ["قُلْ يَا أَيُّهَا الْكَافِرُونَ","Куль я айюхаль-кафирун","Скажи: «О неверующие!"],
+    ["لَا أَعْبُدُ مَا تَعْبُدُونَ","Ля а‘буду ма та‘будун","Я не поклоняюсь тому, чему поклоняетесь вы"],
+    ["وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ","Ва ля антум ‘абидуна ма а‘буд","А вы не поклоняетесь Тому, Кому поклоняюсь я"],
+    ["وَلَا أَنَا عَابِدٌ مَا عَبَدْتُمْ","Ва ля ана ‘абидун ма ‘абаттум","Я не стану поклоняться тому, чему поклоняетесь вы"],
+    ["وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ","Ва ля антум ‘абидуна ма а‘буд","А вы не станете поклоняться Тому, Кому поклоняюсь я"],
+    ["لَكُمْ دِينُكُمْ وَلِيَ دِينِ","Лякум динукум ва лия дин","У вас — ваша религия, а у меня — моя»"]
+  ]),
   { id:"kursi", title:"Аятуль-Курси", sub:"Сура 2, аят 255", kind:"long", steps:[S(
     "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ",
     "Аятуль-Курси",
-    "Аллах — нет божества, кроме Него, Живого, Вседержителя. Им не овладевают ни дремота, ни сон…",3)] }
+    "Аллах — нет божества, кроме Него, Живого, Вседержителя. Им не овладевают ни дремота, ни сон…",1)] }
 ];
+/* three Quls as one reading: Al-Ikhlas, Al-Falaq, An-Nas */
+const THREE_QULS = { id:"three-quls", title:"Три «Куль»", sub:"Ихлас, Фаляк, Нас — утром и вечером", kind:"seq",
+  steps: ["ikhlas","falaq","nas"].flatMap(id => { const su = SURAHS.find(x => x.id === id); return su.steps.map(st => Object.assign({}, st, { stage: su.title })); }) };
+SURAHS.push(THREE_QULS);
 
 /* ───────── storage (best-effort) ───────── */
 const LS = {
@@ -481,7 +546,7 @@ const LS = {
 
 let custom = LS.get("custom", []);
 let targets = LS.get("targets", {});
-const settings = Object.assign({ mode:"auto", speed:0.8, repeat:true, click:true, chime:true, vibe:true, sound:true, music:"cosmos", musicVol:0.7, bead:"glass" }, LS.get("settings", {}));
+const settings = Object.assign({ mode:"auto", speed:0.8, repeat:true, click:true, chime:true, vibe:true, adapt:true, sound:true, music:"cosmos", musicVol:0.7, bead:"glass" }, LS.get("settings", {}));
 if (settings.ambient === false && !settings.musicSet){ settings.music = "none"; } delete settings.ambient;
 function dayKey(d){ d = d || new Date(); return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
 let stats = Object.assign({ total:0, day:"", today:0, days:{} }, LS.get("stats", {}));
@@ -492,7 +557,14 @@ function allItems(){
   return [MY_DUA, MY_KZ, ...DHIKR, AFTER_SALAH, ...DUAS, NAMES, ...SURAHS,
     ...custom.map(c => ({ id:c.id, custom:true, steps:[S(c.ar||"", c.tr, c.ru||"", c.n||33)] }))];
 }
-function findItem(id){ return allItems().find(i => i.id === id) || DHIKR[0]; }
+function nameItem(i){
+  const st = NAMES.steps[i]; if (!st) return null;
+  return { id:"name-"+i, title:st.tr, sub:`Имя ${i+1} из 99 · ${st.ru}`, steps:[Object.assign({}, st, { n:33 })] };
+}
+function findItem(id){
+  if (/^name-\d+$/.test(id)){ const it = nameItem(+id.slice(5)); if (it) return it; }
+  return allItems().find(i => i.id === id) || DHIKR[0];
+}
 function itemTitle(it){ return it.title || it.steps[0].tr; }
 function isSingle(it){ return it.steps.length === 1; }
 function itemTarget(it){
@@ -835,6 +907,7 @@ function increment(){
   playClick(); vibrate(12);
   if (count >= T){
     rounds++; completeFlash = now; playChime(); vibrate([40,60,40]);
+    dayRoundDone(item.id);
     if (running){ if (settings.repeat) nextAt = now + 1800; else setRunning(false); }
   }
   renderText(); saveState(); updateToday();
@@ -852,10 +925,11 @@ function selectItem(id){
 
 /* auto mode */
 function stepDelay(){
-  if (item.kind !== "read" && item.kind !== "seq") return settings.speed;
+  if (settings.adapt === false) return settings.speed;
   const { step } = currentStep();
-  const chars = (step.body||"").length + (step.tr||"").length + (step.ar||"").length*1.5;
-  return Math.max(settings.speed, chars/14);
+  // reading time: Arabic ~8 letters/s, transliteration ~12/s, plain text ~14/s
+  const need = Math.max((step.ar||"").length/8, (step.tr||"").length/12, (step.body||"").length/14);
+  return need > 3 ? Math.max(settings.speed, need) : settings.speed;
 }
 let wakeLock = null;
 async function lockScreen(on){
@@ -884,7 +958,7 @@ function setMode(m){
 }
 function fmtSpeed(v){ return (Math.round(v*10)/10).toFixed(1).replace(".0", "") + " с"; }
 function setSpeed(v){
-  v = Math.min(6, Math.max(0.4, Math.round(v*10)/10)); settings.speed = v; saveSettings();
+  v = Math.min(30, Math.max(0.4, Math.round(v*10)/10)); settings.speed = v; saveSettings();
   $("speedVal").textContent = fmtSpeed(v); $("speedLabel").textContent = fmtSpeed(v); $("speedRange").value = v;
 }
 function todayCount(){ return stats.day === dayKey() ? stats.today : 0; }
@@ -963,12 +1037,194 @@ $("modeTap").onclick = () => setMode("tap");
 $("playBtn").onclick = () => { audio(); setRunning(!running); };
 $("resetBtn").onclick = resetCount;
 $("undoBtn").onclick = undo;
-$("slower").onclick = () => setSpeed(settings.speed + (settings.speed >= 2 ? 0.5 : 0.1));
-$("faster").onclick = () => setSpeed(settings.speed - (settings.speed > 2 ? 0.5 : 0.1));
+const speedStep = (v, up) => (up ? v >= 6 : v > 6) ? 1 : (up ? v >= 2 : v > 2) ? 0.5 : 0.1;
+$("slower").onclick = () => setSpeed(settings.speed + speedStep(settings.speed, true));
+$("faster").onclick = () => setSpeed(settings.speed - speedStep(settings.speed, false));
 $("soundBtn").onclick = () => {
   settings.sound = !settings.sound; saveSettings(); audio(); syncAmbient(); renderSoundIcon();
 };
 function renderSoundIcon(){ $("soundOn").toggleAttribute("hidden", !settings.sound); $("soundOff").toggleAttribute("hidden", settings.sound); $("soundBtn").setAttribute("aria-label", settings.sound ? "Выключить звук" : "Включить звук"); }
+
+/* ───────── Мой день: daily plan ───────── */
+const SUNNAHS = [
+  ["Начинайте еду со слов «Бисмиллях» и ешьте правой рукой","Сунна за едой"],
+  ["Улыбнитесь кому-нибудь — улыбка брату тоже садака","Тирмизи"],
+  ["Дайте садака сегодня, даже совсем немного","Самая малая садака важна"],
+  ["Поприветствуйте первой: «Ас-саляму алейкум»","Мир — первым"],
+  ["Выходя из дома: «Бисмилляхи таваккальту ‘аля-Ллах, ва ля хауля ва ля куввата илля билЛях»","Абу Дауд, Тирмизи"],
+  ["Совершите 2 ракаата намаза ад-духа — утром, когда солнце поднимется","Намаз духа"],
+  ["Лягте спать в омовении и на правом боку","Сунна сна"],
+  ["Позвоните или навестите родственника — поддерживайте родственные связи","Силат ар-рахим"],
+  ["Пейте воду сидя, в три глотка, начиная с «Бисмиллях»","Сунна питья"],
+  ["Прочитайте суру Аль-Мульк перед сном","Тирмизи"],
+  ["Простите того, кто вас обидел","Прощение"],
+  ["Сделайте дуа за другого человека втайне — ангел скажет: «И тебе того же»","Муслим"],
+  ["Помогите маме или папе без их просьбы","Благочестие к родителям"],
+  ["Прочитайте одну страницу Корана с переводом смыслов","Коран каждый день"],
+  ["Промолчите вместо спора: «Пусть говорит благое или молчит»","Бухари, Муслим"],
+  ["Поблагодарите человека: «Джазакаллаху хайран»","Тирмизи"],
+  ["Накормите птиц или животных","Милосердие"],
+  ["После омовения совершите 2 ракаата","Бухари, Муслим"],
+  ["Сделайте 100 раз «СубханАллахи ва бихамдихи» — грехи стираются, даже если их как морской пены","Бухари, Муслим"],
+  ["Посетите больного или напишите ему тёплое сообщение","Навещать больных"],
+  ["Уберите с дороги что-то мешающее — это часть веры","Муслим"],
+  ["Прочитайте салават 10 раз — Аллах благословит вас 10 раз","Муслим"],
+  ["Встаньте на последнюю треть ночи хотя бы на 2 ракаата и дуа","Тахаджуд"],
+  ["Выучите одно новое имя Аллаха и его смысл","Асма уль-Хусна"]
+];
+const FIXED_DEFAULT = [{id:"after-salah",need:5},{id:"istighfar",need:1},{id:"salawat",need:1},{id:"kursi",need:1},{id:"three-quls",need:1}];
+let fixedList = LS.get("fixed", null) || FIXED_DEFAULT.map(x => ({...x}));
+function saveFixed(){ LS.set("fixed", fixedList); }
+function hashStr(str){ let h = 2166136261; for (let i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+function pools(){
+  const fixedIds = new Set(fixedList.map(f => f.id));
+  return {
+    name: NAMES.steps.map((_,i) => "name-"+i),
+    dhikr: DHIKR.map(d => d.id).filter(id => !fixedIds.has(id)),
+    dua: DUAS.map(d => d.id).filter(id => !fixedIds.has(id)),
+    surah: SURAHS.map(s => s.id).filter(id => !fixedIds.has(id) && id !== "kursi" && id !== "three-quls"),
+    sunnah: SUNNAHS.map((_,i) => "sunnah-"+i)
+  };
+}
+const ROT = [["name","Имя дня"],["dhikr","Зикр дня"],["dua","Дуа дня"],["surah","Сура дня"],["sunnah","Сунна дня"]];
+function dayKeyOf(d){ return "day:" + dayKey(d); }
+function loadDay(){
+  const k = dayKeyOf(); let d = LS.get(k.slice(0) , null);
+  try{ const raw = localStorage.getItem("tasbih:" + k); d = raw ? JSON.parse(raw) : null; }catch(e){ d = null; }
+  if (!d){
+    const P = pools(), base = dayKey(); d = { rot:{}, extra:[], done:{}, manual:{} };
+    ROT.forEach(([kind]) => { const arr = P[kind]; d.rot[kind] = arr.length ? arr[hashStr(base + kind) % arr.length] : null; });
+    saveDay(d); pruneDays();
+  }
+  return d;
+}
+function saveDay(d){ d.pct = dayPct(d); LS.set(dayKeyOf(), d); }
+function pruneDays(){
+  try{ const ks = []; for (let i=0;i<localStorage.length;i++){ const k = localStorage.key(i); if (k.startsWith("tasbih:day:")) ks.push(k); }
+    ks.sort(); while (ks.length > 60) localStorage.removeItem(ks.shift()); }catch(e){}
+}
+function dayTasks(d){
+  const t = fixedList.map(f => ({ key:"f:"+f.id, id:f.id, need:f.need||1, fixed:true }));
+  ROT.forEach(([kind,label]) => { const id = d.rot[kind]; if (id) t.push({ key:"r:"+kind, id, need:1, rot:kind, label }); });
+  (d.extra||[]).forEach(x => t.push({ key:"x:"+x.id, id:x.id, need:x.need||1, extra:true }));
+  return t;
+}
+function taskDone(d, t){ return !!d.manual[t.key] || (!t.id.startsWith("sunnah-") && (d.done[t.id]||0) >= t.need); }
+function dayPct(d){ const t = dayTasks(d); return t.length ? Math.round(100 * t.filter(x => taskDone(d,x)).length / t.length) : 0; }
+function dayRoundDone(id){
+  const d = loadDay(), before = dayTasks(d).every(t => taskDone(d,t));
+  d.done[id] = (d.done[id]||0) + 1; saveDay(d);
+  const after = dayTasks(d).every(t => taskDone(d,t));
+  if (!before && after){ goalFlash = performance.now(); setTimeout(playChime, 900); }
+  renderBadge();
+}
+function renderBadge(){
+  const d = loadDay(), t = dayTasks(d), n = t.filter(x => taskDone(d,x)).length, b = $("dayBadge");
+  b.hidden = false; b.textContent = n + "/" + t.length; b.classList.toggle("full", n === t.length);
+}
+const IC_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const IC_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>';
+const IC_SWAP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg>';
+const IC_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+let dayEdit = false;
+function taskRow(d, t){
+  const done = taskDone(d, t);
+  const row = document.createElement("div"); row.className = "task" + (done ? " done" : "");
+  const chk = document.createElement("button"); chk.type = "button"; chk.className = "chk"; chk.innerHTML = done ? IC_CHECK : "";
+  chk.setAttribute("aria-label", done ? "Отметить как невыполненное" : "Отметить как выполненное");
+  chk.onclick = () => { const dd = loadDay(); if (taskDone(dd, t)){ delete dd.manual[t.key]; if (!t.id.startsWith("sunnah-")) dd.done[t.id] = 0; } else { dd.manual[t.key] = true; } saveDay(dd); renderDay(); renderBadge(); };
+  const info = document.createElement("div"); info.className = "info";
+  const acts = document.createElement("div"); acts.className = "acts";
+  if (t.id.startsWith("sunnah-")){
+    const [txt, src] = SUNNAHS[+t.id.slice(7)] || ["",""];
+    info.innerHTML = '<span class="kind"></span><span class="tt"></span><span class="ts"></span>';
+    info.children[0].textContent = t.label; info.children[1].textContent = txt; info.children[2].textContent = src;
+    info.onclick = () => chk.click();
+  } else {
+    const it = findItem(t.id), s0 = it.steps[0], got = Math.min(d.done[t.id]||0, t.need);
+    const kindLabel = t.label || (t.fixed ? "Обязательно" : "Добавлено");
+    let sub = it.kind === "surah" || it.kind === "seq" || it.kind === "read" ? (it.sub || "") : (isSingle(it) ? "×" + itemTarget(it) + (s0.ru ? " · " + s0.ru : "") : (it.sub || ""));
+    if (t.need > 1) sub = `${got} из ${t.need} · ` + sub;
+    info.innerHTML = '<span class="kind"></span><span class="tt"></span>' + (s0.ar && isSingle(it) && it.kind !== "long" ? '<span class="ta"></span>' : '') + '<span class="ts"></span>';
+    info.querySelector(".kind").textContent = kindLabel; info.querySelector(".tt").textContent = itemTitle(it);
+    const ta = info.querySelector(".ta"); if (ta) ta.textContent = s0.ar;
+    info.querySelector(".ts").textContent = sub;
+    const go = document.createElement("button"); go.type = "button"; go.className = "act go"; go.innerHTML = IC_PLAY; go.setAttribute("aria-label", "Начать");
+    go.onclick = () => { selectItem(t.id); closeSheet(); };
+    info.onclick = go.onclick;
+    acts.appendChild(go);
+  }
+  if (t.rot){
+    const sw = document.createElement("button"); sw.type = "button"; sw.className = "act"; sw.innerHTML = IC_SWAP; sw.setAttribute("aria-label", "Заменить на другое");
+    sw.onclick = () => { const dd = loadDay(), arr = pools()[t.rot].filter(x => x !== dd.rot[t.rot]); if (!arr.length) return;
+      dd.rot[t.rot] = arr[Math.floor(Math.random()*arr.length)]; delete dd.manual[t.key]; saveDay(dd); renderDay(); renderBadge(); };
+    acts.appendChild(sw);
+  }
+  if ((t.fixed && dayEdit) || t.extra){
+    const rm = document.createElement("button"); rm.type = "button"; rm.className = "act rm"; rm.innerHTML = IC_X; rm.setAttribute("aria-label", "Убрать");
+    rm.onclick = () => {
+      if (t.fixed && !rm.classList.contains("armed")){ rm.classList.add("armed"); setTimeout(() => rm.classList.remove("armed"), 2500); return; }
+      if (t.fixed){ fixedList = fixedList.filter(f => f.id !== t.id); saveFixed(); }
+      else { const dd = loadDay(); dd.extra = dd.extra.filter(x => x.id !== t.id); saveDay(dd); }
+      renderDay(); renderBadge();
+    };
+    acts.appendChild(rm);
+  }
+  row.append(chk, info, acts);
+  return row;
+}
+function renderDay(){
+  const pane = $("paneDay"), d = loadDay(), tasks = dayTasks(d), n = tasks.filter(t => taskDone(d,t)).length;
+  const y = pane.scrollTop; pane.textContent = "";
+  const head = document.createElement("div"); head.className = "dhead";
+  const dt = document.createElement("div"); dt.className = "ddate";
+  try{ const ds = new Date().toLocaleDateString("ru-RU", { weekday:"long", day:"numeric", month:"long" }); dt.textContent = ds.charAt(0).toUpperCase() + ds.slice(1); }catch(e){ dt.textContent = dayKey(); }
+  head.appendChild(dt);
+  try{ const h = new Intl.DateTimeFormat("ru-RU-u-ca-islamic-umalqura", { day:"numeric", month:"long", year:"numeric" }).format(new Date());
+    const hj = document.createElement("div"); hj.className = "dhijri"; hj.textContent = h.replace(/\s*г\.?\s*(АН|AH|х\.)?\.?\s*$/i,"") + " г. по хиджре"; head.appendChild(hj); }catch(e){}
+  const pr = document.createElement("div"); pr.className = "dprog";
+  pr.innerHTML = '<div class="goalbar"><i></i></div><b></b>'; pr.querySelector("i").style.width = (tasks.length ? n/tasks.length*100 : 0) + "%";
+  pr.querySelector("b").textContent = `${n} из ${tasks.length}`; head.appendChild(pr);
+  // week
+  const wk = document.createElement("div"); wk.className = "dweek"; const wd = ["вс","пн","вт","ср","чт","пт","сб"]; let streak = 0, counting = true;
+  for (let i=0;i<60;i++){ const dd = new Date(); dd.setDate(dd.getDate()-i); const rec = LS.get("day:"+dayKey(dd), null); const p = rec ? (rec.pct||0) : 0;
+    if (counting){ if (p === 100) streak++; else if (i > 0) counting = false; } }
+  for (let i=6;i>=0;i--){ const dd = new Date(); dd.setDate(dd.getDate()-i); const rec = LS.get("day:"+dayKey(dd), null); const p = rec ? (rec.pct||0) : 0;
+    const c = document.createElement("div"); const dot = document.createElement("i"); if (p === 100) dot.className = "full"; else if (p > 0){ dot.className = "part"; dot.style.setProperty("--p", p + "%"); }
+    c.append(dot, document.createTextNode(wd[dd.getDay()])); wk.appendChild(c); }
+  head.appendChild(wk);
+  if (streak > 1){ const st = document.createElement("div"); st.className = "dhijri"; st.textContent = `Весь план выполнен ${streak} дня подряд`; head.appendChild(st); }
+  pane.appendChild(head);
+  if (n === tasks.length && tasks.length){ const ok = document.createElement("div"); ok.className = "alldone"; ok.textContent = "Альхамдулиллях! Весь план на сегодня выполнен"; pane.appendChild(ok); }
+  const sec = (title, list, extraNode) => { const g = document.createElement("div"); g.className = "group";
+    const h = document.createElement("h3"); h.textContent = title; g.appendChild(h);
+    const l = document.createElement("div"); l.className = "list"; list.forEach(t => l.appendChild(taskRow(d, t))); g.appendChild(l);
+    if (extraNode) g.appendChild(extraNode); pane.appendChild(g); };
+  const editBtn = document.createElement("button"); editBtn.type = "button"; editBtn.className = "mini"; editBtn.style.marginTop = "8px";
+  editBtn.textContent = dayEdit ? "Готово" : "Изменить обязательные"; editBtn.onclick = () => { dayEdit = !dayEdit; renderDay(); };
+  sec("Обязательные · каждый день", tasks.filter(t => t.fixed), editBtn);
+  sec("Сегодня · меняется каждый день", tasks.filter(t => t.rot));
+  const ex = tasks.filter(t => t.extra); if (ex.length) sec("Добавлено на сегодня", ex);
+  // add form
+  const f = document.createElement("form"); f.className = "dadd"; f.noValidate = true;
+  f.innerHTML = '<div class="group"><h3 style="margin:0">Добавить в план</h3></div><select id="dSel" aria-label="Что добавить"></select>' +
+    '<label class="toggle" for="dFixed">Каждый день (в обязательные)<input type="checkbox" id="dFixed"></label>' +
+    '<div class="form-row"><button class="btn primary" type="submit">Добавить</button></div>';
+  const sel = f.querySelector("#dSel");
+  const og = (label, items) => { const g = document.createElement("optgroup"); g.label = label; items.forEach(it => { const o = document.createElement("option"); o.value = it.id; o.textContent = itemTitle(it); g.appendChild(o); }); sel.appendChild(g); };
+  og("Моё", [MY_DUA, MY_KZ, ...custom.map(c => findItem(c.id))]);
+  og("Зикры", [AFTER_SALAH, ...DHIKR]); og("Дуа", DUAS); og("Суры", SURAHS);
+  og("Имена Аллаха", NAMES.steps.map((_,i) => nameItem(i)));
+  f.addEventListener("submit", e => { e.preventDefault(); const id = sel.value; if (!id) return;
+    if (f.querySelector("#dFixed").checked){ if (!fixedList.some(x => x.id === id)) fixedList.push({ id, need:1 }); saveFixed(); }
+    else { const dd = loadDay(); if (!dd.extra.some(x => x.id === id)) dd.extra.push({ id, need:1 }); saveDay(dd); }
+    renderDay(); renderBadge(); });
+  pane.appendChild(f);
+  const note = document.createElement("p"); note.className = "note";
+  note.textContent = "Пункт отмечается сам, когда вы завершаете полный круг этого зикра. Можно отметить и вручную, нажав на кружок. Тасбих после намаза засчитывается 5 раз — после каждого намаза.";
+  pane.appendChild(note);
+  pane.scrollTop = y;
+}
 
 /* ───────── sheet ───────── */
 function openSheet(tab){
@@ -977,11 +1233,13 @@ function openSheet(tab){
 }
 function closeSheet(){ $("scrim").hidden = true; $("sheet").hidden = true; editingId = null; }
 function showTab(tab){
-  $("tabList").setAttribute("aria-selected", tab==="list"); $("tabSettings").setAttribute("aria-selected", tab==="settings"); $("tabDua").setAttribute("aria-selected", tab==="dua");
-  $("paneList").hidden = tab!=="list"; $("paneSettings").hidden = tab!=="settings"; $("paneDua").hidden = tab!=="dua";
-  if (tab === "list") renderList(); else if (tab === "settings") { renderMusicPane(); renderTargetPane(); renderStats(); }
+  $("tabList").setAttribute("aria-selected", tab==="list"); $("tabSettings").setAttribute("aria-selected", tab==="settings"); $("tabDua").setAttribute("aria-selected", tab==="dua"); $("tabDay").setAttribute("aria-selected", tab==="day");
+  $("paneList").hidden = tab!=="list"; $("paneSettings").hidden = tab!=="settings"; $("paneDua").hidden = tab!=="dua"; $("paneDay").hidden = tab!=="day";
+  if (tab === "day") renderDay();
+  else if (tab === "list") renderList(); else if (tab === "settings") { renderMusicPane(); renderTargetPane(); renderStats(); }
 }
-$("openList").onclick = () => openSheet("list");
+$("openList").onclick = () => openSheet("day");
+$("tabDay").onclick = () => showTab("day");
 $("openSettings").onclick = () => openSheet("settings");
 $("closeSheet").onclick = closeSheet; $("scrim").onclick = closeSheet;
 $("tabDua").onclick = () => showTab("dua");
@@ -1119,7 +1377,7 @@ function setTarget(n){
 $("targetChips").querySelectorAll(".chip").forEach(b => b.onclick = () => setTarget(+b.dataset.t));
 $("targetCustom").addEventListener("change", e => { const v = parseInt(e.target.value,10); if (v > 0) setTarget(v); });
 $("speedRange").addEventListener("input", e => setSpeed(+e.target.value));
-[["repeatT","repeat"],["clickT","click"],["chimeT","chime"],["vibeT","vibe"]].forEach(([id,k]) => {
+[["adaptT","adapt"],["repeatT","repeat"],["clickT","click"],["chimeT","chime"],["vibeT","vibe"]].forEach(([id,k]) => {
   $(id).checked = !!settings[k];
   $(id).addEventListener("change", e => { settings[k] = e.target.checked; saveSettings(); });
 });
@@ -1357,7 +1615,7 @@ function drawBeads(now){
   // beads: far ones first, center last
   const sorted = pts.slice().sort((a,b) => Math.abs(b.d) - Math.abs(a.d));
   for (const p of sorted){
-    const marker = ((p.k - roundStart) % T + T) % T === 0;
+    const marker = T >= 5 && ((p.k - roundStart) % T + T) % T === 0;
     if (marker) tassel(p.x, p.y, p.r);
     bead(p.x, p.y, p.r, marker, Math.abs(p.d) < 0.6 || marker);
   }
@@ -1404,6 +1662,8 @@ setSpeed(settings.speed);
 setMode(settings.mode);
 renderSoundIcon();
 renderText(true);
+renderBadge();
+setInterval(() => { if (document.visibilityState === "visible") renderBadge(); }, 60000);
 updateToday();
 (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => { layoutDirty = true; });
 requestAnimationFrame(frame);
